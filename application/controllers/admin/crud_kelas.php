@@ -7,12 +7,7 @@ class Crud_kelas extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 
 		$this->load->library('session');
@@ -23,38 +18,38 @@ class Crud_kelas extends CI_Controller
 	{
 		$rk	=	$this->input->post('rk');
 		$no_kls = $this->input->post('nk');
-		$datas = $this->db->get_where('tb_kelas', ['nama_kelas' => $rk , 'no_kls' => $no_kls])->result_array();
+		$datas = $this->db->get_where('tb_kelas', ['nama_kelas' => $rk, 'no_kls' => $no_kls])->result_array();
 
-		if($datas == TRUE){
-			echo"<script>alert('Nomor Gedung & Gedung Sudah digunakan');location='../admin/kelas'</script>"; 
-		}else{
-		$lembaga = $this->input->post('lembaga');
-		$marhalah = $this->input->post('marhalah');
-		$no_kls = $this->input->post('nk');
-		$rk	=	$this->input->post('rk');
-		$wk	=	$this->input->post('wk');
-		$as =	$this->input->post('as');
-		$gender	=	$this->input->post('g');
-		$kls =	$this->input->post('kls');
-		$kls_a	= $this->input->post('kls_a');
-		$uid = uniqid();
-		$uri = $this->input->post('uri');
+		if ($datas == TRUE) {
+			echo "<script>alert('Nomor Gedung & Gedung Sudah digunakan');location='../admin/kelas'</script>";
+		} else {
+			$lembaga = $this->input->post('lembaga');
+			$marhalah = $this->input->post('marhalah');
+			$no_kls = $this->input->post('nk');
+			$rk	=	$this->input->post('rk');
+			$wk	=	$this->input->post('wk');
+			$as =	$this->input->post('as');
+			$gender	=	$this->input->post('g');
+			$kls =	$this->input->post('kls');
+			$kls_a	= $this->input->post('kls_a');
+			$uid = uniqid();
+			$uri = $this->input->post('uri');
 
-		$data = array(
-			'code_kelas' => $uid,
-			'lembaga'	=>	$lembaga,
-			'marhalah'	=>	$marhalah,
-			'no_kls'	=> $no_kls,
-			'nama_kelas'	=>	$rk,
-			'kelass'	=>	$kls . $kls_a,
-			'wali_kelas'	=>	$wk,
-			'asisten'	=>	$as,
-			'gender'	=>	$gender,
-		);
+			$data = array(
+				'code_kelas' => $uid,
+				'lembaga'	=>	$lembaga,
+				'marhalah'	=>	$marhalah,
+				'no_kls'	=> $no_kls,
+				'nama_kelas'	=>	$rk,
+				'kelass'	=>	$kls . $kls_a,
+				'wali_kelas'	=>	$wk,
+				'asisten'	=>	$as,
+				'gender'	=>	$gender,
+			);
 
-		$this->m_kelas->tb_kelas($data, 'tb_kelas');
-		echo "<script>alert('Data berhasil disimpan');location='../admin/$uri'</script>";
-	}
+			$this->m_kelas->tb_kelas($data, 'tb_kelas');
+			echo "<script>alert('Data berhasil disimpan');location='../admin/$uri'</script>";
+		}
 	}
 	function ed_kelas()
 	{
@@ -81,26 +76,26 @@ class Crud_kelas extends CI_Controller
 		);
 
 		$where = ['code_kelas' => $uid];
-        $this->m_kelas->ed_kelas($where, $data, 'tb_kelas');
-        echo "<script>alert('Data berhasil Diubah');location='../../admin/admin/$uri'</script>";
+		$this->m_kelas->ed_kelas($where, $data, 'tb_kelas');
+		echo "<script>alert('Data berhasil Diubah');location='../../admin/admin/$uri'</script>";
 	}
 	function ed_kls()
-	{	
+	{
 
-		$urie=$this->input->post('urie');
-		$klse=$this->input->post('klse');
-		$uide=$this->input->post('nise');
+		$urie = $this->input->post('urie');
+		$klse = $this->input->post('klse');
+		$uide = $this->input->post('nise');
 
 		$data = array(
 			'kelas'	=>	$klse,
 		);
 		$where = ['nis' => $uide];
-        $this->m_kelas->ed_kelas($where, $data, 'tb_dsantri');
-        echo "<script>alert('Data berhasil Diubah');location='../../admin/admin/$urie'</script>";
+		$this->m_kelas->ed_kelas($where, $data, 'tb_dsantri');
+		echo "<script>alert('Data berhasil Diubah');location='../../admin/admin/$urie'</script>";
 	}
 	function h_kelas()
 	{
-		$u=$this->uri->segment(5);
+		$u = $this->uri->segment(5);
 		$where = ['code_kelas' => $this->uri->segment(4)];
 		$this->m_kelas->h_kelas($where, 'tb_kelas');
 		echo "<script>alert('Data berhasil dihapus');location='../../../admin/$u'</script>";

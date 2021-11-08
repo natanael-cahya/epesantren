@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2021 at 08:46 PM
+-- Generation Time: Aug 31, 2021 at 05:04 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -135,7 +135,7 @@ CREATE TABLE `perizinan` (
 --
 
 INSERT INTO `perizinan` (`code_perizinan`, `nis_perizinan`, `status_perizinan`, `tgl_mulai`, `tgl_selesai`, `keterangan_izin`) VALUES
-('dq1qw3q3qd', '3543643523', 'Keluar Pondok', '2021-08-24', '2021-08-26', 'Keluar pondok untuk beli perlengkapan mandiz');
+('dq1qw3q3qd', '3543643523', 'Keluar Pondok', '2021-08-24', '2021-08-26', 'Keluar pondok untuk beli perlengkapan mandi');
 
 -- --------------------------------------------------------
 
@@ -169,15 +169,16 @@ CREATE TABLE `tahfidz` (
   `status_tahfidz` varchar(125) NOT NULL,
   `ayat` varchar(5) NOT NULL,
   `surat` varchar(5) NOT NULL,
-  `juz` varchar(5) NOT NULL
+  `juz` varchar(5) NOT NULL,
+  `tgl_input` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tahfidz`
 --
 
-INSERT INTO `tahfidz` (`code_tahfidz`, `nis_tahfidz`, `status_tahfidz`, `ayat`, `surat`, `juz`) VALUES
-('61231ec3926ce', '111213141516', 'I`DAD', '3', '2', '1');
+INSERT INTO `tahfidz` (`code_tahfidz`, `nis_tahfidz`, `status_tahfidz`, `ayat`, `surat`, `juz`, `tgl_input`) VALUES
+('anej3b3hwq22w', '111213141516', 'I`DAD', '2', '4', '1', '2021-08-28');
 
 -- --------------------------------------------------------
 
@@ -447,6 +448,7 @@ CREATE TABLE `tb_pelanggaran` (
   `tgl` date NOT NULL,
   `waktu` varchar(255) NOT NULL,
   `sanksi` varchar(255) NOT NULL,
+  `tingkat` varchar(20) NOT NULL,
   `nis` varchar(255) NOT NULL,
   `sort` varchar(122) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -455,14 +457,14 @@ CREATE TABLE `tb_pelanggaran` (
 -- Dumping data for table `tb_pelanggaran`
 --
 
-INSERT INTO `tb_pelanggaran` (`code_pelanggaran`, `pelanggaran`, `hari`, `tgl`, `waktu`, `sanksi`, `nis`, `sort`) VALUES
-('606ae40cbe7f1', 'makan saat jam Pelajaranz', 'Senin', '2021-04-01', '17:18:15', 'Membersihkan Kamar Mandi', '3543643523', 'kmi'),
-('606ae67392998', 'Tidak mengikuti jadwal sholat Subuh', 'Senin', '2021-03-05', '17:27:49', 'Membersihkan Halaman Rumah Kyai', '3543643523', 'peribadatan'),
-('606ae6b3e96c0', 'Menggunakan kata kata tidak pantas saat berada dalam lingkungan Pondokz', 'Senin', '2021-01-05', '17:29:20', 'Membersihkan Area lapangan selama 7 Hari', '3543643523', 'bahasa'),
-('6082c7c51a154', 'Tidur saat jam ibadah', 'Jum\'at', '2021-04-23', '20:12:26', 'Lari memutari lapangan 1000x', '3543643523', 'pengasuhan'),
-('60b1ac2480196', 'membuang sampah sembarangan', 'Sabtu', '2021-05-29', '09:50:21', 'membersihkan lapangan selama 2 minggu', '3543643523', 'kebersihan'),
-('60b1af1d30754', 'Memanjat pagar kabur dari pondok', 'Sabtu', '2021-05-29', '10:03:29', 'Membantu jaga malam', '3543643523', 'keamanan'),
-('60b1af3a8acf8', 'Tidak menggunakan seragam traiining', 'Sabtu', '2021-05-29', '10:04:02', 'Lari memutari lapangan 10000x', '3543643523', 'olahraga');
+INSERT INTO `tb_pelanggaran` (`code_pelanggaran`, `pelanggaran`, `hari`, `tgl`, `waktu`, `sanksi`, `tingkat`, `nis`, `sort`) VALUES
+('606ae40cbe7f1', 'makan saat jam Pelajaran', 'Senin', '2021-04-01', '17:18:15', 'Membersihkan Kamar Mandi', 'Berat', '3543643523', 'kmi'),
+('606ae67392998', 'Tidak mengikuti jadwal sholat Subuh', 'Senin', '2021-03-05', '17:27:49', 'Membersihkan Halaman Rumah Kyai', 'Ringan', '3543643523', 'peribadatan'),
+('606ae6b3e96c0', 'Menggunakan kata kata tidak pantas saat berada dalam lingkungan Pondokz', 'Senin', '2021-01-05', '17:29:20', 'Membersihkan Area lapangan selama 7 Hari', 'Sedang', '3543643523', 'bahasa'),
+('6082c7c51a154', 'Tidur saat jam ibadah', 'Jum\'at', '2021-04-23', '20:12:26', 'Lari memutari lapangan 1000x', 'Sedang', '3543643523', 'pengasuhan'),
+('60b1ac2480196', 'membuang sampah sembarangan', 'Sabtu', '2021-05-29', '09:50:21', 'membersihkan lapangan selama 2 minggu', 'Ringan', '3543643523', 'kebersihan'),
+('60b1af1d30754', 'Memanjat pagar kabur dari pondok', 'Sabtu', '2021-05-29', '10:03:29', 'Membantu jaga malam', 'Sedang', '3543643523', 'keamanan'),
+('60b1af3a8acf8', 'Tidak menggunakan seragam traiining', 'Sabtu', '2021-05-29', '10:04:02', 'Lari memutari lapangan 10000x', 'Berat', '3543643523', 'olahraga');
 
 -- --------------------------------------------------------
 

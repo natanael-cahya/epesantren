@@ -7,12 +7,7 @@ class Crud_akun extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 		$this->load->model('m_akun');
 		$this->load->helper('url');

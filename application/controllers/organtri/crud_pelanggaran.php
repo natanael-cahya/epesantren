@@ -7,12 +7,7 @@ class Crud_pelanggaran extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 4) {
-			redirect('login');
-		}
+		organtri_check();
 
 		$this->load->model('m_pelanggaran');
 		$this->load->helper('url');
@@ -29,6 +24,7 @@ class Crud_pelanggaran extends CI_Controller
 		$jam = $this->input->post('jam');
 		$sanksi = $this->input->post('sanksi');
 		$sort = $this->input->post('sort');
+		$tingkat = $this->input->post('tingkat');
 		$kd = uniqid();
 		$uri = $this->input->post('uri');
 
@@ -39,6 +35,7 @@ class Crud_pelanggaran extends CI_Controller
 			'tgl'	=> $tgl,
 			'waktu'	=> $jam,
 			'sanksi'	=> $sanksi,
+			'tingkat'	=> $tingkat,
 			'nis'	=> $nis,
 			'sort'	=> $sort,
 

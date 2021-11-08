@@ -7,12 +7,7 @@ class Pengajar extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 3) {
-			redirect('login');
-		}
+		pengajar_check();
 
 		$this->load->library('session');
 		$this->load->model('m_jadwal');
@@ -53,7 +48,7 @@ class Pengajar extends CI_Controller
 	{
 		$data['judul'] = "Data Kelas";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
-	
+
 		$this->db->where('tb_kelas.gender=', 'L');
 		$data['klas'] = $this->m_kelas->get_kelas();
 
@@ -65,13 +60,12 @@ class Pengajar extends CI_Controller
 		$this->load->view('template/sidebar_s2', $data);
 		$this->load->view('pengajar/kelas/index');
 		$this->load->view('template/footer', $data);
-		
 	}
 	function kelas_p()
 	{
 		$data['judul'] = "Data Kelas";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
-		
+
 		$this->db->where('tb_kelas.gender=', 'P');
 		$data['klas'] = $this->m_kelas->get_kelas();
 
@@ -83,7 +77,6 @@ class Pengajar extends CI_Controller
 		$this->load->view('template/sidebar_s2', $data);
 		$this->load->view('pengajar/kelas/index');
 		$this->load->view('template/footer', $data);
-		
 	}
 	function pm()
 	{

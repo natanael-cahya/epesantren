@@ -7,12 +7,7 @@ class Crud_ortu extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 
 		$this->load->library('session');
@@ -39,7 +34,7 @@ class Crud_ortu extends CI_Controller
 		$penghasilan_i = $this->input->post('penghasilan_i');
 		$no_a = $this->input->post('no_a');
 		$no_i = $this->input->post('no_i');
-		$nis=$this->input->post('nis');
+		$nis = $this->input->post('nis');
 
 		$data = array(
 			'id_ortu' => $kd,
@@ -58,16 +53,16 @@ class Crud_ortu extends CI_Controller
 			'pekerjaan_ibu' => $pekerjaan_a,
 			'penghasilan_ibu' => $penghasilan_a,
 			'no_hp_ibu' => $no_a,
-			
+
 		);
-		
+
 
 		$this->m_ortu->tb_ortu($data, 'tb_ortu');
 		echo "<script>alert('Data berhasil disimpan');location='../admin/ortu'</script>";
 	}
 	function ed_ortu()
 	{
-		
+
 		$ayah = $this->input->post('ayahe');
 		$ibu = $this->input->post('ibue');
 		$agama_a = $this->input->post('agama_ae');
@@ -82,11 +77,11 @@ class Crud_ortu extends CI_Controller
 		$penghasilan_i = $this->input->post('penghasilan_ie');
 		$no_a = $this->input->post('no_ae');
 		$no_i = $this->input->post('no_ie');
-		$nis=$this->input->post('nise');
-		$idd=$this->input->post('idd');
+		$nis = $this->input->post('nise');
+		$idd = $this->input->post('idd');
 
 		$data = array(
-			
+
 			'nama_ayah' => $ayah,
 			'agama_ayah' => $agama_a,
 			'tetala_ayah' => $ttl_a,
@@ -105,9 +100,8 @@ class Crud_ortu extends CI_Controller
 			'nis'	=> $nis,
 		);
 		$where = ['id_ortu' => $idd];
-        $this->m_ortu->ed_ortu($where, $data, 'tb_ortu');
-        echo "<script>alert('Data berhasil disimpan');location='../../admin/admin/ortu'</script>";
-		
+		$this->m_ortu->ed_ortu($where, $data, 'tb_ortu');
+		echo "<script>alert('Data berhasil disimpan');location='../../admin/admin/ortu'</script>";
 	}
 	function h_ortu()
 	{

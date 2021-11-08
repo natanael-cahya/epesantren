@@ -899,8 +899,8 @@ class Laporan extends CI_Controller
 			$spreadsheet->getSheet(0)->getColumnDimension('B')->setWidth(25);
 			$spreadsheet->getSheet(0)->getColumnDimension('C')->setWidth(25);
 			$spreadsheet->getSheet(0)->getColumnDimension('D')->setWidth(50);
-			$spreadsheet->getSheet(0)->getColumnDimension('E')->setWidth(25);
-			$spreadsheet->getSheet(0)->getColumnDimension('F')->setWidth(25);
+			$spreadsheet->getSheet(0)->getColumnDimension('E')->setWidth(40);
+			$spreadsheet->getSheet(0)->getColumnDimension('F')->setWidth(40);
 
 			// Add some data
 			$spreadsheet->setActiveSheetIndex(0)

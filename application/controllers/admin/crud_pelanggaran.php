@@ -7,12 +7,7 @@ class Crud_pelanggaran extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 		$this->load->model('m_pelanggaran');
 		$this->load->helper('url');
@@ -29,6 +24,7 @@ class Crud_pelanggaran extends CI_Controller
 		$jam = $this->input->post('jam');
 		$sanksi = $this->input->post('sanksi');
 		$sort = $this->input->post('sort');
+		$tingkat = $this->input->post('tingkat');
 		$kd = uniqid();
 		$uri = $this->input->post('uri');
 
@@ -39,6 +35,7 @@ class Crud_pelanggaran extends CI_Controller
 			'tgl'	=> $tgl,
 			'waktu'	=> $jam,
 			'sanksi'	=> $sanksi,
+			'tingkat'	=> $tingkat,
 			'nis'	=> $nis,
 			'sort'	=> $sort,
 
@@ -54,24 +51,26 @@ class Crud_pelanggaran extends CI_Controller
 		echo "<script>alert('Data berhasil Dihapus');location='../../../admin/$uri'</script>";
 	}
 	function ed_pel()
-    {
+	{
 
-        $niss = $this->input->post('nise');
-        $plg = $this->input->post('plg');
+		$niss = $this->input->post('nise');
+		$plg = $this->input->post('plg');
 		$sanks = $this->input->post('sanks');
 		$idy = $this->input->post('idx');
 		$uri = $this->input->post('uri');
+		$tingkat = $this->input->post('tingkat');
 
 
-        $data = array(
-            'nis' => $niss,
-            'pelanggaran' => $plg,
+		$data = array(
+			'nis' => $niss,
+			'pelanggaran' => $plg,
 			'sanksi'	=> $sanks,
+			'tingkat'	=> $tingkat
 
 
-        );
-        $where = ['code_pelanggaran' => $idy];
-        $this->m_pelanggaran->ed_pel($where, $data, 'tb_pelanggaran');
-        echo "<script>alert('Data berhasil disimpan');location='../../admin/admin/$uri'</script>";
-    }
+		);
+		$where = ['code_pelanggaran' => $idy];
+		$this->m_pelanggaran->ed_pel($where, $data, 'tb_pelanggaran');
+		echo "<script>alert('Data berhasil disimpan');location='../../admin/admin/$uri'</script>";
+	}
 }

@@ -7,7 +7,7 @@ class Perizinan extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		is_logged_in();
+		pengajar_check();
 
 
 		$this->load->library('session');
@@ -22,8 +22,8 @@ class Perizinan extends CI_Controller
 		$data['pp'] = $this->M_perizinan->get_perizinan();
 
 		$this->load->view('template/header', $data);
-		$this->load->view('template/sidebar', $data);
-		$this->load->view('admin/perizinan/index', $data);
+		$this->load->view('template/sidebar_s2', $data);
+		$this->load->view('pengajar/perizinan/index', $data);
 		$this->load->view('template/footer', $data);
 	}
 	function tb_data()

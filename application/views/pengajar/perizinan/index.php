@@ -1,8 +1,9 @@
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
 			<div class="page-header">
-				<h4 class="page-title">Data Tahfizh Santri</h4>
+				<h4 class="page-title">Data perizinan Santri</h4>
 				<ul class="breadcrumbs">
 					<li class="nav-home">
 						<a href="#">
@@ -19,7 +20,7 @@
 						<i class="flaticon-right-arrow"></i>
 					</li>
 					<li class="nav-item">
-						<a href="#">Data Tahfizh Santri</a>
+						<a href="#">Data perizinan Santri</a>
 					</li>
 				</ul>
 			</div>
@@ -35,7 +36,7 @@
 							</div>
 							<br>
 							<div class="d-flex align-items-center">
-								<a target="_blank" data-toggle="modal" data-target="#modalpr" class="btn btn-warning btn-sm ml-auto">
+								<a target="_blank" class="btn btn-warning btn-sm ml-auto" data-toggle="modal" data-target="#modalpr">
 									<i class="fa fa-print"></i>
 									Print Data
 								</a>&nbsp;
@@ -51,10 +52,10 @@
 											<tr>
 												<th>No</th>
 												<th>Nama Santri</th>
-												<th>Status</th>
-												<th>Ayat</th>
-												<th>Surat</th>
-												<th>Juz</th>
+												<th>Status Izin</th>
+												<th>tanggal izin</th>
+                                                <th>Tanggal Selesai</th>
+                                                <th>keterangan</th>
 												<th>Aksi</th>
 											</tr>
 										</thead>
@@ -65,16 +66,16 @@
 												<tr>
 													<td><?= $n++; ?></td>
 													<td><?= $l->nama ?></td>
-													<td><?= $l->status_tahfidz ?></td>
-													<td><?= $l->ayat ?> Ayat</td>
-													<td> <?= $l->surat ?> Surat</td>
-													<td><?= $l->juz ?> Juz</td>
+													<td><?= $l->status_perizinan ?></td>
+													<td><?= date("d-m-Y",strtotime($l->tgl_mulai)) ?> </td>
+                                                    <td><?= date("d-m-Y",strtotime($l->tgl_selesai)) ?></td>
+                                                    <td><?= $l->keterangan_izin ?></td>
+													
 
 													<td style="width:10%;">
 														<div class="row">
-															<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalsantriz<?= $l->code_tahfidz ?>"><i class="fa fa-edit"></i></button>
-															<a href="<?= base_url('admin/tahfidz/delete/');
-																		echo $l->code_tahfidz  ?>" class="btn btn-danger btn-sm text-white ml-1"><i class="fa fa-trash"></i> </a>
+															<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalsantriz<?= $l->code_perizinan ?>"><i class="fa fa-edit"></i></button>
+															
 														</div>
 
 													</td>
@@ -89,26 +90,23 @@
 											</div>
 											</div>
 											</div>
-											</div>
-											</div>
+                                            </div>
+                                            </div>
 				
 
-
-
-
-	<!-- Modal -->
-	<div class="modal fade" id="modalpr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="modalpr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-success">
-					<h5 class="modal-title" id="exampleModalLabel">Form Data Pelanggaran Bahasa</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Form Opsi Print</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 
-					<form name="f1" method="post" action="<?= base_url('admin/laporan/l_tf'); ?>">
+					<form name="f1" method="post" action="<?= base_url('admin/laporan/l_pz'); ?>">
 						<div class="row">	
 							<div class="col">
 								<label for="foto">Dari Tanggal</label>
@@ -137,14 +135,14 @@
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-success">
-					<h5 class="modal-title" id="exampleModalLabel">Form Data Pelanggaran Bahasa</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Form Opsi Export</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 
-					<form name="f1" method="post" action="<?= base_url('admin/laporan/export_tahfizh'); ?>">
+					<form name="f1" method="post" action="<?= base_url('admin/laporan/export_perizinan'); ?>">
 					<div class="row">	
 							<div class="col">
 								<label for="foto">Dari Tanggal</label>
@@ -168,9 +166,11 @@
 	</div>
 	</div>
 
+
+
 	<!-- Modal Edit -->
 	<?php foreach ($pp as $l) { ?>
-		<div class="modal fade" id="modalsantriz<?= $l->code_tahfidz ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="modalsantriz<?= $l->code_perizinan ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header bg-success">
@@ -180,17 +180,18 @@
 						</button>
 					</div>
 					<div class="modal-body">
-							<form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/tahfidz/edit'); ?>">
+							<form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('pengajar/perizinan/edit'); ?>">
 								<div class="row">
 									<div class="col">
 										<label for="nis">NIS</label>
 										<a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ep","Ratting",
 						"width=950,height=570,toolbar=1,status=1,");'>
-											<input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $l->nis ?>" class="form-control" id="nisee" placeholder="NIS">
+											<input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $l->nis_perizinan ?>" class="form-control" id="nisee" placeholder="NIS">
 										</a>
 
 									</div>
 								</div>
+								<br>
 								<div class="row">
 									<div class="col">
 										<label for="nama">Nama</label>
@@ -201,35 +202,41 @@
 								<div class="row">
 
 									<div class="col">
-										<label for="foto">Status</label>
-										<select class="form-control" name="state">
+										<label for="foto">Status Perizinan</label>
+										<select class="form-control" name="stats">
 											<option>- Pilih Status -</option>
-											<option <?= $l->status_tahfidz == 'TAHSIN' ? 'selected' :'' ?>>TAHSIN</option>
-											<option <?= $l->status_tahfidz == 'I`DAD' ? 'selected' :'' ?>>I`DAD</option>
-											<option <?= $l->status_tahfidz == 'TAHFIZH' ? 'selected' :'' ?>>TAHFIZH</option>
+											<option <?= $l->status_perizinan == 'Sakit' ? 'selected' : '' ?> >Sakit</option>
+											<option <?= $l->status_perizinan == 'Pulang' ? 'selected' : '' ?> >Pulang</option>
+											<option <?= $l->status_perizinan == 'Keluar Pondok' ? 'selected' : '' ?> >Keluar Pondok</option>
 										</select>
 									</div>
 								</div>
 								<br>
 								<div class="row">
 									<div class="col">
-										<label for="alamat">Ayat</label>
-										<input type="text" name="ayate" value="<?= $l->ayat ?>" class="form-control" id="alamat" placeholder="Alamat">
+										<label for="alamat">Tanggal Mulai</label>
+										<input type="text" name="" value="<?= $l->tgl_mulai ?>" readonly class="form-control" id="alamat" placeholder="Alamat">
 										
-									</div>
-									<div class="col">
-										<label for="alamat">Surat</label>
-										<input type="text" name="surate" value="<?= $l->surat ?>" class="form-control" id="alamat" placeholder="Alamat">
-										
-									</div>
-									<div class="col">
-										<label for="alamat">Juz</label>
-										<input type="text" name="juze" value="<?= $l->juz ?>" class="form-control" id="alamat" placeholder="Alamat">
-										
-										<input type="hidden" name="idx" value="<?= $l->code_tahfidz ?>">
+										<input type="hidden" name="idx" value="<?= $l->code_perizinan?>">
 									</div>
 								</div>
 								<br>
+									<div class="row">
+									<div class="col">
+										<label for="alamat">Tanggal Selesai</label>
+										<input type="text" name="tgl_selesai" value="<?= $l->tgl_selesai ?>" class="form-control datepicker" id="alamat" placeholder="Alamat">
+										
+									
+									</div>
+								</div>
+								<br>
+								<div class="row">
+									<div class="col">
+										<label for="alamat">Keterangan</label>
+										<textarea class="form-control" name="ket"><?= $l->keterangan_izin ?></textarea>
+										
+									</div>
+								</div>
 								
 							
 					</div>
@@ -257,7 +264,7 @@
 				</div>
 				<div class="modal-body">
 
-					<form name="f1" method="post" action="<?= base_url('admin/tahfidz/tb_data'); ?>">
+					<form name="f1" method="post" action="<?= base_url('pengajar/perizinan/tb_data'); ?>">
 
 						<div class="row">
 							<div class="col">
@@ -273,12 +280,12 @@
 						</div><br>
 						<div class="row">
 							<div class="col">
-								<label for="foto">Status</label>
+								<label for="foto">Status Perizinan</label>
 								<select class="form-control" name="stat">
 									<option>- Pilih Status -</option>
-									<option>TAHSIN</option>
-									<option>I`DAD</option>
-									<option>TAHFIZH</option>
+									<option>Sakit</option>
+									<option>Pulang</option>
+									<option>Keluar Pondok</option>
 								</select>
 
 							</div>
@@ -286,17 +293,20 @@
 						</div><br>
 						<div class="row">	
 							<div class="col">
-								<label for="foto">Ayat</label>
-								<input type="number" name="ayat" class="form-control" placeholder="Input Ayat">
+                            <label for="foto">Tanggal Mulai</label>
+								<input type="text" name="tm" readonly class="form-control" value="<?= date('Y-m-d') ?>">
 							</div>
 							<div class="col">
-								<label>Surat</label>
-								<input type="number" name="surat" class="form-control" placeholder="Input Surat">
+                            <label for="foto">Sampai Tanggal</label>
+								<input type="date" name="ts" class="form-control">
 							</div>
-							<div class="col">
-								<label>Juz</label>
-								<input type="number" name="juz" class="form-control" placeholder="Input Juz">
-							</div>
+                        </div>
+                        <br>
+                        <div class="row">  
+                            <div class="col">
+                                <label>Keterangan IZIN</label>
+                            <textarea class="form-control" name="ket"></textarea>
+                            </div>
 						</div><br>
 					
 				</div>

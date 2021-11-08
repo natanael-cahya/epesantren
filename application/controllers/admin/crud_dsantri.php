@@ -7,12 +7,7 @@ class Crud_dsantri extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 
 		$this->load->library('session');
@@ -61,7 +56,7 @@ class Crud_dsantri extends CI_Controller
 			'tgl_lahir' => $tgl_lahir,
 			'code_kamar' => $kamar,
 			'kelas'	=> $kelas,
-			
+
 			'keterangan' => $keterangan,
 			'foto' => $nama_f,
 			'status' => $stat,
@@ -81,7 +76,7 @@ class Crud_dsantri extends CI_Controller
 
 	function up_santri()
 	{
-	
+
 		$nis = $this->input->post('nise');
 		$nama = $this->input->post('namae');
 		$jk = $this->input->post('jke');
@@ -92,12 +87,12 @@ class Crud_dsantri extends CI_Controller
 		$kelas = $this->input->post('kelase');
 		$id_ortu = $this->input->post('id_ortue');
 		$keterangan = $this->input->post('keterangane');
-		
 
-		
+
+
 
 		$data = array(
-			
+
 			'nama' => $nama,
 			'jk' => $jk,
 			'alamat' => $alamat,
@@ -106,48 +101,46 @@ class Crud_dsantri extends CI_Controller
 			'code_kamar' => $kamar,
 			'kelas'	=> $kelas,
 			'keterangan' => $keterangan,
-		
+
 
 		);
 		$where = ['nis' => $nis];
-		
-		$this->m_dsantri->ed_santri($where,$data, 'tb_dsantri');
+
+		$this->m_dsantri->ed_santri($where, $data, 'tb_dsantri');
 		echo "<script>alert('Data berhasil disimpan');location='../admin/santri'</script>";
-	
 	}
 	function h_santri()
 	{
 		$wws = $this->uri->segment(5);
-		$z=$this->db->query("SELECT id_details,COUNT( niss ) AS total FROM details WHERE id_ortu='$wws'")->row_array();
+		$z = $this->db->query("SELECT id_details,COUNT( niss ) AS total FROM details WHERE id_ortu='$wws'")->row_array();
 		//var_dump($z);die();
-		
-		if($z['total'] > '1'){
-	
-		$ww = ['niss' => $this->uri->segment(4)];
-		$where = ['nis' => $this->uri->segment(4)];
-		$a = $this->db->get_where('tb_dsantri', ['nis' => $this->uri->segment(4)])->row_array();
-		$p = $a['foto'];
-		$path  = './upload_img/foto_santri/'.$p;
-		unlink($path);
-		$this->m_dsantri->h_santri($ww, 'details');
-		$this->m_dsantri->h_santri($where, 'tb_dsantri');
-		echo "<script>alert('Data berhasil disimpan');location='../../../admin/santri'</script>";
 
-		}else if($z['total'] == '1'){
+		if ($z['total'] > '1') {
 
-		$ww = ['niss' => $this->uri->segment(4)];
-		$where = ['nis' => $this->uri->segment(4)];
-		$a = $this->db->get_where('tb_dsantri', ['nis' => $this->uri->segment(4)])->row_array();
-		$b = $this->db->get_where('details', ['niss' => $this->uri->segment(4)])->row_array();
-		$z = $b['id_ortu'];
-		$w2 = ['id_ortu' => $z];
-		$p = $a['foto'];
-		$path  = './upload_img/foto_santri/'.$p;
-		unlink($path);
-		$this->m_dsantri->h_santri($w2, 'tb_ortu');
-		$this->m_dsantri->h_santri($ww, 'details');
-		$this->m_dsantri->h_santri($where, 'tb_dsantri');
-		echo "<script>alert('Data berhasil disimpan');location='../../../admin/santri'</script>";
+			$ww = ['niss' => $this->uri->segment(4)];
+			$where = ['nis' => $this->uri->segment(4)];
+			$a = $this->db->get_where('tb_dsantri', ['nis' => $this->uri->segment(4)])->row_array();
+			$p = $a['foto'];
+			$path  = './upload_img/foto_santri/' . $p;
+			unlink($path);
+			$this->m_dsantri->h_santri($ww, 'details');
+			$this->m_dsantri->h_santri($where, 'tb_dsantri');
+			echo "<script>alert('Data berhasil disimpan');location='../../../admin/santri'</script>";
+		} else if ($z['total'] == '1') {
+
+			$ww = ['niss' => $this->uri->segment(4)];
+			$where = ['nis' => $this->uri->segment(4)];
+			$a = $this->db->get_where('tb_dsantri', ['nis' => $this->uri->segment(4)])->row_array();
+			$b = $this->db->get_where('details', ['niss' => $this->uri->segment(4)])->row_array();
+			$z = $b['id_ortu'];
+			$w2 = ['id_ortu' => $z];
+			$p = $a['foto'];
+			$path  = './upload_img/foto_santri/' . $p;
+			unlink($path);
+			$this->m_dsantri->h_santri($w2, 'tb_ortu');
+			$this->m_dsantri->h_santri($ww, 'details');
+			$this->m_dsantri->h_santri($where, 'tb_dsantri');
+			echo "<script>alert('Data berhasil disimpan');location='../../../admin/santri'</script>";
 		}
 	}
 
@@ -182,7 +175,7 @@ class Crud_dsantri extends CI_Controller
 
 		);
 		$where = ['kelas' => $kelas1];
-		$this->m_kelas->ed_kelas($where,$data, 'tb_dsantri');
+		$this->m_kelas->ed_kelas($where, $data, 'tb_dsantri');
 		echo "<script>alert('Data berhasil disimpan');location='../admin/santri_k'</script>";
 	}
 	function upd_kelas()
@@ -190,27 +183,27 @@ class Crud_dsantri extends CI_Controller
 		$nis = $this->input->post('p_nis');
 		$kls_p = $this->input->post('opsi_s');
 
-		if(empty($nis)){
-			echo"<script>alert('Pilih minimal 1 Santri/Wati');location='../admin/santri_k'</script>";
-		}else
-		if(empty($kls_p)){
-			echo"<script>alert('Pilih Tujuan Kelas');location='../admin/santri_k'</script>";
-		}else
-		if($kls_p == 'Alumni'){
+		if (empty($nis)) {
+			echo "<script>alert('Pilih minimal 1 Santri/Wati');location='../admin/santri_k'</script>";
+		} else
+		if (empty($kls_p)) {
+			echo "<script>alert('Pilih Tujuan Kelas');location='../admin/santri_k'</script>";
+		} else
+		if ($kls_p == 'Alumni') {
 			$nis = $this->input->post('p_nis');
 			$kls_p = $this->input->post('opsi_s');
-			$nis = implode(",",$nis);
-		
+			$nis = implode(",", $nis);
+
 			//var_dump($nis);die();
-			$this->m_dsantri->upd_kelasA($kls_p,$nis);
+			$this->m_dsantri->upd_kelasA($kls_p, $nis);
 			echo "<script>alert('Data berhasil disimpan');location='../admin/santri_k'</script>";
-		}else{
+		} else {
 			$nis = $this->input->post('p_nis');
 			$kls_p = $this->input->post('opsi_s');
-			$nis = implode(",",$nis);
-		
+			$nis = implode(",", $nis);
+
 			//var_dump($nis);die();
-			$this->m_dsantri->upd_kelas($kls_p,$nis);
+			$this->m_dsantri->upd_kelas($kls_p, $nis);
 			echo "<script>alert('Data berhasil disimpan');location='../admin/santri_k'</script>";
 		}
 	}
@@ -221,28 +214,28 @@ class Crud_dsantri extends CI_Controller
 		$tm = $this->input->post('tmpt');
 		$pr = $this->input->post('pr');
 
-		if($st == 'Abituren' && $tm == '-'){
-			echo"<script>alert('Input tempat dengan benar');location='../admin/santri'</script>";
-		}else
-		if($st == 'Alumni' && $tm == '-'){
-		
+		if ($st == 'Abituren' && $tm == '-') {
+			echo "<script>alert('Input tempat dengan benar');location='../admin/santri'</script>";
+		} else
+		if ($st == 'Alumni' && $tm == '-') {
+
 			$st = $this->input->post('status');
-		$tm = $this->input->post('tmpt');
-		$pr = $this->input->post('pr');
+			$tm = $this->input->post('tmpt');
+			$pr = $this->input->post('pr');
 
 			$data = array(
 				'status'		=>	$st,
 				'tempat_abituren' => $tm,
 				'code_kamar' => '-',
 				'kelas' => '-',
-	
+
 			);
-		
+
 			//var_dump($nis);die();
 			$where = ['nis' => $pr];
-			$this->m_dsantri->ed_santri($where,$data,'tb_dsantri');
+			$this->m_dsantri->ed_santri($where, $data, 'tb_dsantri');
 			echo "<script>alert('Data berhasil DiUbah');location='../admin/santri'</script>";
-		}else if($st == 'Pengabdian' && $tm == '-'){
+		} else if ($st == 'Pengabdian' && $tm == '-') {
 			$nama = $this->input->post('namaa');
 			$alamat = $this->input->post('alamata');
 			$jk = $this->input->post('jka');
@@ -252,7 +245,7 @@ class Crud_dsantri extends CI_Controller
 			$foto = $this->input->post('fotoa');
 			$status = $this->input->post('statusa');
 
-			$data = array (
+			$data = array(
 				'nama_pengajar'			=>	$nama,
 				'alamat_pengajar'		=>	$alamat,
 				'jk_pengajar'			=>	$jk,
@@ -266,24 +259,22 @@ class Crud_dsantri extends CI_Controller
 			$this->m_dsantri->h_santri($where, 'tb_dsantri');
 			$this->m_dsantri->tb_santri($data, 'tb_pengajar');
 			echo "<script>alert('Data berhasil disimpan');location='../admin/santri'</script>";
-		}else{
-			
-		$st = $this->input->post('status');
-		$tm = $this->input->post('tmpt');
-		$pr = $this->input->post('pr');
+		} else {
+
+			$st = $this->input->post('status');
+			$tm = $this->input->post('tmpt');
+			$pr = $this->input->post('pr');
 
 			$data = array(
 				'status'		=>	$st,
 				'tempat_abituren' => $tm,
-	
+
 			);
-		
+
 			//var_dump($nis);die();
 			$where = ['nis' => $pr];
-			$this->m_dsantri->ed_santri($where,$data,'tb_dsantri');
+			$this->m_dsantri->ed_santri($where, $data, 'tb_dsantri');
 			echo "<script>alert('Data berhasil DiUbah');location='../admin/santri'</script>";
 		}
-	
 	}
-
 }

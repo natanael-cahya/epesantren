@@ -65,7 +65,7 @@ $time=date('H:i');
 
 //silahkan set/ganti WAKTU ALARM berbunyi:
 ?>
-<div class="col-5 ml-auto mr-auto" style="opacity:0.9;background-color:;">
+<div class="col-5 ml-auto mr-auto" style="opacity:0.9;">
 <table border="0" align="center" style="margin-top: 170px;" >
 	<tr>
 		<td colspan="5" class="text-white" style="text-align: center;font-size: 20pt;font-weight: bolder;">Waktu :<br> </td>
@@ -91,30 +91,23 @@ $time=date('H:i');
 <?php foreach($alarm2 as $key){ 
 ?>
 	<tr class="text-white">
-		<td class="">
-		<div class="float-right">&nbsp;&nbsp;</div>
-			<input class="form-control bg-dark text-white float-right" style="border:;width:35%;font-size:30px;height:50px;" type="text" name="" id="jams" value="<?= $key->jam ?>" readonly>
+		<td>
+			<label for="zz">Jam :</label>
+			<input class="form-control bg-dark text-white" type="text" name="" id="jams" value="<?= $key->jam ?>" readonly>
 			</td>
 
-		<td class="">
-			<div class="float-left h3">: &nbsp;</div>
-			<input class="form-control bg-dark text-white float-left" style="border:;width:35%;font-size:30px;height:50px;" type="text" name="" id="alarm" value="<?= $key->menit ?>" readonly>
+		<td>
+			<label for="ax">Menit :</label>
+			<input class="form-control bg-dark text-white" type="text" name="" id="alarm" value="<?= $key->menit ?>" readonly>
 		</td>
 		<input type="hidden" name="" id="re" value="2"><br>
 			<input class="float-right" type="hidden" name="" id="dtk" value="00">
 
 			</div>
 </tr>
-
-<tr>
-		<td colspan="2" class="text-center h4 text-white"><br>Jenis Kegiatan Berikutnya :<br><b><u><?= $key->keterangan ?></u></b></td>
-</tr>
 		<?php } ?>
-		
 		</table>
-		
 		</div>
-		<div style="width:100%;bottom:0;position:fixed;background-color:yellow;height:40px;font-size:25px;font-weight:bolder;"><marquee>PENGUMUMAN PENGUMUMAN GENG OKE</marquee></div>
 </body>
 
 <script src="<?= base_url('assets') ?>/template/js/core/jquery.3.2.1.min.js"></script>
@@ -194,14 +187,40 @@ $time=date('H:i');
 				</div>
 				<div class="modal-body">
 
-					<form name="f2" method="post" action="<?= base_url('admin/crud_alarm/xls_import'); ?>" enctype="multipart/form-data">
+					<form name="f2" method="post" action="<?= base_url('admin/crud_alarm/tb_alarm'); ?>">
 					<div class="row">
 					<div class="col">
-						<label>Pilih File Excel :</label>
-						<input type="file" name="upload_file" class="form-control">
+					<input type="button" onclick="addInput()" value="+ Jadwal" class="btn btn-primary" />
+					<input type="button" onclick="minInput()" value="- Jadwal" class="btn btn-danger " />
 					</div>
 					</div>
-				
+					<br>
+						<div class="row">
+						<div class="col">
+						<label for="ttg">Tanggal</label>
+						<input type="date" class="form-control" name="tgl[]" style="cursor:pointer;">
+						</div>
+							<div class="col">
+								<label for="foto">Jam</label>
+								<select name="jam[]" class="form-control">
+								<?php for($v=1;$v<=24;$v++){ ?>
+									<option><?php if($v == '24'){echo"00";}else{echo $v ;} ?></option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="col">
+								<label for="foto">Menit</label>
+								<select name="menit[]" class="form-control">	
+								<?php for($v=1;$v<=60;$v++){ ?>
+									<option><?= $v ?></option>
+									<?php } ?>
+								</select>
+							</div>
+
+						</div>
+									
+									<div id="responce"></div>
+									<br>
 
 				</div>
 				<div class="modal-footer">

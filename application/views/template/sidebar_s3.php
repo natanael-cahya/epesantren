@@ -67,7 +67,17 @@
 					</span>
 					<h4 class="text-section">GENERAL</h4>
 				</li>
+				<li <?php if ($this->uri->segment(3) == 'perizinan') {
+							echo 'class= "nav-item active"';
+						} else {
+							echo 'class= "nav-item "';
+						} ?>>
+						<a href="<?= base_url('organtri/perizinan'); ?>">
+							<i class="fas fa-address-book"></i>
+							<p>Perizinan Santri</p>
 
+						</a>
+					</li>
                 <li <?php if ($this->uri->segment(3) == 'pp') {
 							echo 'class= "nav-item active"';
 						} else {

@@ -65,6 +65,7 @@
 				</li>
 				<!-- DATA MASTER-->
 
+				
 				<li <?php if ($this->uri->segment(3) == 'kelas' || $this->uri->segment(3) == 'kelas_p') {
 						echo 'class= "nav-item active"';
 					} else {
@@ -91,6 +92,17 @@
 				</li>
 				<!-- DROPDOWN MENU -->
 
+				<li <?php if ($this->uri->segment(3) == 'perizinan') {
+						echo 'class= "nav-item active"';
+					} else {
+						echo 'class= "nav-item "';
+					} ?>>
+					<a href="<?= base_url('pengajar/perizinan'); ?>">
+						<i class="fas fa-address-book"></i>
+						<p>Perizinan Santri</p>
+
+					</a>
+				</li>
 				<li <?php if ($this->uri->segment(3) == 'kelas_s' || $this->uri->segment(3) == 'kelas_ps') {
 							echo 'class= "nav-item active"';
 						} else {

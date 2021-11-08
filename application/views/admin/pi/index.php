@@ -55,6 +55,7 @@
 												<th>Tanggal</th>
 												<th>Waktu</th>
 												<th>Sanksi</th>
+												<th>Tingkatan</th>
 												<th>Aksi</th>
 											</tr>
 										</thead>
@@ -69,6 +70,7 @@
 													<td><?php echo date("d-m-Y", strtotime($l->tgl)); ?></td>
 													<td> <?= $l->waktu ?></td>
 													<td><?= $l->sanksi ?></td>
+													<td><?= $l->tingkat ?></td>
 													<td>
 														<div class="row">
 															<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalsantriz<?= $l->nis ?>"><i class="fa fa-edit"></i></button>
@@ -93,8 +95,8 @@
 
 
 	<!-- Modal Edit -->
-	<?php foreach ($pp as $key) { ?>
-		<div class="modal fade" id="modalsantriz<?= $key->nis ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<?php foreach ($pp as $k) { ?>
+		<div class="modal fade" id="modalsantriz<?= $k->nis ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header bg-success">
@@ -104,7 +106,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<?php foreach ($pp as $k) { ?>
+						<?php // foreach ($pp as $k) { ?>
 							<form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/crud_pelanggaran/ed_pel'); ?>">
 								<div class="row">
 									<div class="col">
@@ -140,6 +142,17 @@
 									</div>
 								</div>
 								<br>
+								<div class="row">
+									<div class="col">
+										<label for="alamat">Tingkat Pelanggaran</label>
+										<select class="form-control" name="tingkat">
+										<option <?= $k->tingkat == 'Ringan' ? 'selected':'' ?>>Ringan</option>
+											<option <?= $k->tingkat == 'Sedang' ? 'selected':'' ?>>Sedang</option>
+											<option <?= $k->tingkat == 'Berat' ? 'selected':'' ?>>Berat</option>
+											<option <?= $k->tingkat == 'Sangat Berat' ? 'selected':'' ?>>Sangat Berat</option>
+										</select>
+									</div>
+								</div>
 								
 							
 					</div>
@@ -147,7 +160,7 @@
 						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
 						<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
 						</form>
-					<?php } ?>
+					<?php // } ?>
 					</div>
 				</div>
 			</div>
@@ -238,6 +251,18 @@
 								<input type="hidden" class="form-control" name="uri" value="<?= $this->uri->segment(3); ?>">
 							</div>
 						</div>
+						<br>
+						<div class="row">
+									<div class="col">
+										<label for="alamat">Tingkat Pelanggaran</label>
+										<select class="form-control" name="tingkat">
+											<option>Ringan</option>
+											<option>Sedang</option>
+											<option>Berat</option>
+											<option>Sangat Berat</option>
+										</select>
+									</div>
+								</div>
 
 
 				</div>

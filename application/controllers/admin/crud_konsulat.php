@@ -7,12 +7,7 @@ class Crud_konsulat extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 1) {
-			redirect('login');
-		}
+		is_logged_in();
 
 
 		$this->load->library('session');
@@ -42,23 +37,23 @@ class Crud_konsulat extends CI_Controller
 		echo "<script>alert('Data berhasil disimpan');location='../../admin/konsulat'</script>";
 	}
 	function ed_konsulat()
-    {
+	{
 
-        $nise = $this->input->post('nise');
-        $pem = $this->input->post('pem');
+		$nise = $this->input->post('nise');
+		$pem = $this->input->post('pem');
 		$ket = $this->input->post('ket');
-		$idh=$this->input->post('idh');
+		$idh = $this->input->post('idh');
 
 
-        $data = array(
-            'nis' => $nise,
-            'pembimbing' => $pem,
+		$data = array(
+			'nis' => $nise,
+			'pembimbing' => $pem,
 			'ketua_konsulat' => $ket,
 
 
-        );
-        $where = ['code_konsulat' => $idh];
-        $this->m_konsulat->ed_konsulat($where, $data, 'tb_konsulat');
-        echo "<script>alert('Data berhasil diubah');location='../../admin/admin/konsulat'</script>";
-    }
+		);
+		$where = ['code_konsulat' => $idh];
+		$this->m_konsulat->ed_konsulat($where, $data, 'tb_konsulat');
+		echo "<script>alert('Data berhasil diubah');location='../../admin/admin/konsulat'</script>";
+	}
 }

@@ -302,83 +302,57 @@
 						</a>
 					</li>
 
-					<li <?php if ($this->uri->segment(3) == 'pp') {
+					<li <?php if ($this->uri->segment(3) == 'kelas' || $this->uri->segment(3) == 'kelas_p') {
 							echo 'class= "nav-item active"';
 						} else {
 							echo 'class= "nav-item "';
 						} ?>>
+						<a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-gavel"></i>
+							<p>Data Pelanggaran</p>
+						</a>
+						<div class="dropdown-menu">
+
 						<a href="<?= base_url('admin/admin/pp'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran Pengasuhan</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'pm') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/pm'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran KMI</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'pb') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/pb'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran Bahasa</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'pi') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/pi'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran Peribadatan</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'or') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/or'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran Olahraga</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'km') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/km'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran Keamanan</p>
 
 						</a>
-					</li>
-					<li <?php if ($this->uri->segment(3) == 'kb') {
-							echo 'class= "nav-item active"';
-						} else {
-							echo 'class= "nav-item "';
-						} ?>>
 						<a href="<?= base_url('admin/admin/kb'); ?>">
 							<i class="fas fa-gavel"></i>
 							<p>Pelanggaran kebersihan</p>
 
 						</a>
+
+
+						</div>
 					</li>
+
 					<li <?php if ($this->uri->segment(3) == 'i_akun') {
 							echo 'class= "nav-item active"';
 						} else {

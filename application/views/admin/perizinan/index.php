@@ -1,3 +1,4 @@
+
 <div class="main-panel">
 	<div class="content">
 		<div class="page-inner">
@@ -35,11 +36,11 @@
 							</div>
 							<br>
 							<div class="d-flex align-items-center">
-								<a target="_blank" href="<?= base_url('admin/laporan/l_pz'); ?>" class="btn btn-warning btn-sm ml-auto">
+								<a target="_blank" class="btn btn-warning btn-sm ml-auto" data-toggle="modal" data-target="#modalpr">
 									<i class="fa fa-print"></i>
 									Print Data
 								</a>&nbsp;
-								<a target="_blank" href="<?= base_url('admin/laporan/export_Apel'); ?>" class="btn btn-info btn-sm ">
+								<a target="_blank" data-toggle="modal" data-target="#modalex" class="btn btn-info btn-sm ">
 									<i class="fa fa-download"></i>
 									Download Data
 								</a>
@@ -94,7 +95,77 @@
                                             </div>
 				
 
+<!-- Modal -->
+<div class="modal fade" id="modalpr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-success">
+					<h5 class="modal-title" id="exampleModalLabel">Form Opsi Print</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
 
+					<form name="f1" method="post" action="<?= base_url('admin/laporan/l_pz'); ?>">
+						<div class="row">	
+							<div class="col">
+								<label for="foto">Dari Tanggal</label>
+								<input type="date" name="ds" class="form-control">
+							</div>
+						</div><br>
+						<div class="row">	
+							<div class="col">
+								<label for="foto">Sampai tanggal</label>
+								<input type="date" name="de" class="form-control">
+							</div>
+						</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
+					<button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Print Data</button>
+					</form>
+				</div>
+			</div>
+	</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="modalex" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-success">
+					<h5 class="modal-title" id="exampleModalLabel">Form Opsi Export</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<form name="f1" method="post" action="<?= base_url('admin/laporan/export_perizinan'); ?>">
+					<div class="row">	
+							<div class="col">
+								<label for="foto">Dari Tanggal</label>
+								<input type="date" name="ds" class="form-control">
+							</div>
+						</div><br>
+						<div class="row">	
+							<div class="col">
+								<label for="foto">Sampai tanggal</label>
+								<input type="date" name="de" class="form-control">
+							</div>
+						</div>
+					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
+					<button type="submit" class="btn btn-primary"><i class="fa fa-files"></i> Export Data</button>
+					</form>
+				</div>
+			</div>
+	</div>
+	</div>
 
 
 

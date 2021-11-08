@@ -7,12 +7,7 @@ class Organtri extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 4) {
-			redirect('login');
-		}
+		organtri_check();
 
 		$this->load->library('session');
 		$this->load->model('m_jadwal');
@@ -26,9 +21,9 @@ class Organtri extends CI_Controller
 		$this->load->model('m_guru');
 	}
 
-    function index()
-    {
-        $data['judul'] = "Dashboard";
+	function index()
+	{
+		$data['judul'] = "Dashboard";
 
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 
@@ -48,8 +43,8 @@ class Organtri extends CI_Controller
 		$this->load->view('template/sidebar_s3', $data);
 		$this->load->view('organtri/index', $data);
 		$this->load->view('template/footer', $data);
-    }
-    function pp()
+	}
+	function pp()
 	{
 		$data['judul'] = "Data Pelanggaran Pengasuhan";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();

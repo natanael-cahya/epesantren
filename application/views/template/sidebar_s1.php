@@ -124,6 +124,17 @@
 
 						</a>
 					</li>
+					<li <?php if ($this->uri->segment(3) == "perizinan") {
+							echo 'class= "nav-item active"';
+						} else {
+							echo 'class= "nav-item "';
+						} ?>>
+						<a href="<?= base_url('pengasuhan/perizinan'); ?>">
+							<i class="fas fa-address-book"></i>
+							<p>Data Perizinan</p>
+
+						</a>
+					</li>
 					
 				<li <?php if ($this->uri->segment(3) == 'pp') {
 						echo 'class= "nav-item active"';

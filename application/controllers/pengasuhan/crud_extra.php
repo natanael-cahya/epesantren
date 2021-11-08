@@ -7,12 +7,7 @@ class Crud_extra extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata('level')) {
-            redirect('login');
-        } else
-		if ($this->session->userdata('level') != 2) {
-            redirect('login');
-        }
+        pengasuhan_check();
 
 
         $this->load->library('session');
@@ -62,9 +57,9 @@ class Crud_extra extends CI_Controller
     }
     function ed_ext()
     {
-        $dt=$this->input->post('dt');
-        $exe=$this->input->post('exe');
-        $uri=$this->input->post('uri');
+        $dt = $this->input->post('dt');
+        $exe = $this->input->post('exe');
+        $uri = $this->input->post('uri');
 
         $data = array(
             'code_extra' => $exe,

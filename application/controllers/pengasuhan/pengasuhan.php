@@ -7,12 +7,7 @@ class Pengasuhan extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		if (!$this->session->userdata('level')) {
-			redirect('login');
-		} else
-		if ($this->session->userdata('level') != 2) {
-			redirect('login');
-		}
+		pengasuhan_check();
 
 
 		$this->load->library('session');
@@ -160,7 +155,7 @@ class Pengasuhan extends CI_Controller
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 
 
-		
+
 		$data['Aextra'] = $this->m_extra->no_extra();
 
 		$data['ext'] = $this->m_extra->get_extra();
