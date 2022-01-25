@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2021 at 05:04 AM
+-- Generation Time: Jan 25, 2022 at 02:07 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -45,7 +45,8 @@ INSERT INTO `auth` (`code_auth`, `nama`, `username`, `password`, `level`, `tgl_j
 ('1', 'Admin Pesantren', 'admin', '$2y$10$w8qvAcjkW1Jkrn7RiPpafO/kiCSRLKeJCDVMOiaKoRoiKg.Vog0Yq', 1, '2021-04-01', 'L'),
 ('55', 'Staffnye Pengasuhanz', 'staff', '$2y$10$3192CBAEg6vr2qm6CGEDN.NtvqQkAvNk4ZMG59OQOH5fKfr.dQu2W', 2, '2021-04-05', 'P'),
 ('606be0e4d10cd', 'Staff Pengajaran', 'pengajaran', '$2y$10$6vtixbL0JY7T2cmaaM6mnutTlz5OtE3Ko1BVvVTh9YuDxrDBntqUq', 3, '2021-04-06', 'L'),
-('606be1a307236', 'Organisasi Santri', 'organtri', '$2y$10$A5TmQD69BJq4zELpfoKBDe6x2tesYDVsaa/HI5samtv7jOuZTHq66', 4, '2021-04-06', 'P');
+('606be1a307236', 'Organisasi Santri', 'organtri', '$2y$10$A5TmQD69BJq4zELpfoKBDe6x2tesYDVsaa/HI5samtv7jOuZTHq66', 4, '2021-04-06', 'P'),
+('61ef0763657c1', 'Poskestren  AL-Mashduqiah', 'poskestren', '$2y$10$rzqxunOLl3NRE/UxxKNmCe/GEXAphj9z0R705Wej.9Qa2EYHvOA.K', 5, '2022-01-24', 'L');
 
 -- --------------------------------------------------------
 
@@ -66,7 +67,8 @@ CREATE TABLE `detaile` (
 INSERT INTO `detaile` (`id_detaile`, `nis`, `code_extra`) VALUES
 (2, '3543643523', '607aba789b59b'),
 (4, '3543643523', '60a9e1de24199'),
-(6, '098765432112', '60856162cf670');
+(6, '098765432112', '60856162cf670'),
+(7, '3543643523', '60856162cf670');
 
 -- --------------------------------------------------------
 
@@ -88,6 +90,7 @@ INSERT INTO `details` (`id_details`, `niss`, `id_ortu`) VALUES
 ('21qe3qadsadc2', '098765432112', '605dc7822c102'),
 ('3weq23r41qae', '3543643523', '60bbae1436557'),
 ('6122530895342', '45453442', '60bba395779f4'),
+('61e91d886d8f9', '12345678999', '61e91b8cad027'),
 ('esdfw24rwe', '384239742893', '60bba395779f4'),
 ('esqwdqw3e231sw', '111213141516', '60840c8695860');
 
@@ -100,20 +103,23 @@ INSERT INTO `details` (`id_details`, `niss`, `id_ortu`) VALUES
 CREATE TABLE `jadwal_alarm` (
   `code_ja` int(11) NOT NULL,
   `tanggal` date NOT NULL,
+  `hari` varchar(15) NOT NULL,
   `jam_asli` varchar(22) NOT NULL,
   `jam` int(11) NOT NULL,
-  `menit` varchar(11) NOT NULL
+  `menit` varchar(11) NOT NULL,
+  `keterangan` varchar(115) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `jadwal_alarm`
 --
 
-INSERT INTO `jadwal_alarm` (`code_ja`, `tanggal`, `jam_asli`, `jam`, `menit`) VALUES
-(1, '2021-04-22', '2202', 22, '02'),
-(6, '2021-04-22', '1620', 16, '20'),
-(7, '2021-04-22', '1625', 16, '25'),
-(12, '2021-06-07', '1238', 12, '38');
+INSERT INTO `jadwal_alarm` (`code_ja`, `tanggal`, `hari`, `jam_asli`, `jam`, `menit`, `keterangan`) VALUES
+(99, '2022-01-20', 'selasa', '1345', 13, '45', 'pelajaran mengaji'),
+(100, '2022-01-21', 'selasa', '1444', 14, '44', 'olahraga'),
+(101, '2022-01-22', 'selasa', '1543', 15, '43', 'hafalan Qur\'an'),
+(102, '2022-01-23', 'selasa', '1643', 16, '43', 'kerja bakti'),
+(103, '2022-01-24', 'selasa', '1743', 17, '43', 'hehe');
 
 -- --------------------------------------------------------
 
@@ -126,16 +132,21 @@ CREATE TABLE `perizinan` (
   `nis_perizinan` varchar(125) NOT NULL,
   `status_perizinan` varchar(125) NOT NULL,
   `tgl_mulai` date NOT NULL,
-  `tgl_selesai` date NOT NULL,
-  `keterangan_izin` varchar(225) NOT NULL
+  `tgl_selesai` datetime NOT NULL,
+  `keterangan_izin` varchar(225) NOT NULL,
+  `stat` int(1) NOT NULL,
+  `verif` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `perizinan`
 --
 
-INSERT INTO `perizinan` (`code_perizinan`, `nis_perizinan`, `status_perizinan`, `tgl_mulai`, `tgl_selesai`, `keterangan_izin`) VALUES
-('dq1qw3q3qd', '3543643523', 'Keluar Pondok', '2021-08-24', '2021-08-26', 'Keluar pondok untuk beli perlengkapan mandi');
+INSERT INTO `perizinan` (`code_perizinan`, `nis_perizinan`, `status_perizinan`, `tgl_mulai`, `tgl_selesai`, `keterangan_izin`, `stat`, `verif`) VALUES
+('61e9255ed6bea', '12345678999', 'Sakit', '2022-01-20', '2022-01-23 12:15:00', 'Sakit Perut', 1, 0),
+('61eafedc49a56', '111213141516', 'Keluar Pondok', '2022-01-22', '2022-01-29 22:49:00', 'xczxz', 0, 0),
+('61ef0f3fa0755', '12345678999', 'Sakit', '2022-01-25', '2022-01-27 14:42:00', 'sakit di Acc oleh poskestren', 0, 1),
+('dq1qw3q3qd', '3543643523', 'Keluar Pondok', '2021-08-24', '2021-08-26 20:11:00', 'Keluar pondok untuk beli perlengkapan mandi', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -155,6 +166,7 @@ CREATE TABLE `prestasi` (
 --
 
 INSERT INTO `prestasi` (`code_prestasi`, `nis_prestasi`, `prestasi`, `tgl`) VALUES
+('61e9267a48b0b', '12345678999', 'Juara makan kerupuk', '2022-01-20'),
 ('sefwr3232w', '384239742893', 'Mbohz', '2021-08-24');
 
 -- --------------------------------------------------------
@@ -166,9 +178,10 @@ INSERT INTO `prestasi` (`code_prestasi`, `nis_prestasi`, `prestasi`, `tgl`) VALU
 CREATE TABLE `tahfidz` (
   `code_tahfidz` varchar(125) NOT NULL,
   `nis_tahfidz` varchar(125) NOT NULL,
+  `pembimbing` varchar(50) NOT NULL,
   `status_tahfidz` varchar(125) NOT NULL,
   `ayat` varchar(5) NOT NULL,
-  `surat` varchar(5) NOT NULL,
+  `surat` varchar(15) NOT NULL,
   `juz` varchar(5) NOT NULL,
   `tgl_input` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -177,8 +190,12 @@ CREATE TABLE `tahfidz` (
 -- Dumping data for table `tahfidz`
 --
 
-INSERT INTO `tahfidz` (`code_tahfidz`, `nis_tahfidz`, `status_tahfidz`, `ayat`, `surat`, `juz`, `tgl_input`) VALUES
-('anej3b3hwq22w', '111213141516', 'I`DAD', '2', '4', '1', '2021-08-28');
+INSERT INTO `tahfidz` (`code_tahfidz`, `nis_tahfidz`, `pembimbing`, `status_tahfidz`, `ayat`, `surat`, `juz`, `tgl_input`) VALUES
+('61e922d6032bb', '12345678999', 'Tauhid Sa`dullah, LC', 'TAHFIZH', '50-82', 'Yasin', '26', '2022-01-24'),
+('61e9ccfb6a330', '12345678999', 'Tauhid Sa`dullah, LC', 'TAHFIZH', '1-20', 'yasinn', '17', '2022-01-23'),
+('61ec409868c60', '12345678999', 'Tauhid Sa`dullah, LC', 'TAHFIZH', '1-21', 'TESTER', '1', '2022-01-22'),
+('61ec6a44340a7', '12345678999', 'Tauhid Sa`dullah, LC', 'TAHFIZH', '2-44', 'COBA', '1', '2022-01-21'),
+('61edd2c19564e', '3543643523', 'H. Imam Zarkasi, S.E', 'TAHFIZH', '1-4', 'MENCOBA', '10', '2022-01-23');
 
 -- --------------------------------------------------------
 
@@ -207,9 +224,10 @@ CREATE TABLE `tb_dsantri` (
 
 INSERT INTO `tb_dsantri` (`nis`, `nama`, `alamat`, `jk`, `tempat_lahir`, `tgl_lahir`, `code_kamar`, `kelas`, `keterangan`, `foto`, `status`, `tempat_abituren`) VALUES
 ('098765432112', 'Qomariyah', 'Jl.Bumi Datar Negeri no.92 kraksaan ', 'perempuan', 'Probolinggo', '2001-07-24', '60654c980f1e4', '606c508462fb8', 'Santriwati di PP.AL-Mashduqiah ', '8e00cef0369aec8415c6190436cba52f.jpg', 'Santri Aktif', ''),
-('111213141516', 'Solehudin', 'Jl. Apa saja yang penting oke no.38 Kraksaan Wetan', 'laki-laki', 'Probolinggo', '2000-02-16', '60845e0ac639a', '60b1b50452ec8', 'Santri di PP.AL-Mashduqiah ', '3b6eaaaee5be48548d1c3d728c8ef566.jpg', 'Santri Aktif', ''),
+('111213141516', 'Solehudin', 'Jl. Apa saja yang penting oke no.38 Kraksaan Wetan', 'laki-laki', 'Probolinggo', '2000-02-16', '-', '-', 'Santri di PP.AL-Mashduqiah ', '3b6eaaaee5be48548d1c3d728c8ef566.jpg', 'Alumni', ''),
+('12345678999', 'Zahwa', 'Kraksaan Wetan', 'Perempuan', 'Probolinggo', '2020-02-18', '61e91d2508245', '60b1b61fe5be8', 'Santriwati di PP.AL-Mashduqiah ', '79aaa12c32e697de9d5393840faf1962.png', 'Santri aktif', '-'),
 ('3543643523', 'Fendik ', 'Jl.Kraksaan no 003', 'laki-laki', 'Probolinggo', '2001-03-01', '60845e0ac639a', '60b1b50452ec8', 'Santri di PP.Al-Mashduqiah', 'e057c482606db1badf755efbd8922f57.PNG', 'Santri Aktif', ''),
-('384239742893', 'Setianingsih', 'Jl. Apa saja deh no.38 Kraksaan Wetan', 'Perempuan', 'Probolinggo', '2005-04-04', '60654c980f1e4', '60bbcd20e1e41', 'Santriwati di PP.AL-Mashduqiah ', '394b862b8dafba066a6546745dae23c7.png', 'Santri aktif', '-');
+('384239742893', 'Setianingsih', 'Jl. Apa saja deh no.38 Kraksaan Wetan', 'Perempuan', 'Probolinggo', '2005-04-04', '60654c980f1e4', '60b1b61fe5be8', 'Santriwati di PP.AL-Mashduqiah ', '394b862b8dafba066a6546745dae23c7.png', 'Santri aktif', '-');
 
 -- --------------------------------------------------------
 
@@ -252,7 +270,8 @@ CREATE TABLE `tb_kamar` (
 
 INSERT INTO `tb_kamar` (`code_kamar`, `wali_kamar`, `ruang_kamar`, `rayon`, `gender`) VALUES
 ('60654c980f1e4', 'Septiyaningsih', '1', 'Asean', 'P'),
-('60845e0ac639a', 'Restu', '1', 'AL-Kautsar Utara', 'L');
+('60845e0ac639a', 'H. Imam Zarkasi, S.E', '1', 'AL-Kautsar Utara', 'L'),
+('61e91d2508245', 'Taufiqur Rahman', '5', 'AT-Taubah', 'L');
 
 -- --------------------------------------------------------
 
@@ -278,9 +297,10 @@ CREATE TABLE `tb_kelas` (
 
 INSERT INTO `tb_kelas` (`code_kelas`, `nama_kelas`, `no_kls`, `kelass`, `wali_kelas`, `asisten`, `marhalah`, `lembaga`, `gender`) VALUES
 ('606c508462fb8', 'AL-Ikhlas', '102', '1B', 'Kofifah', 'Yantii', 'SMP', '1', 'P'),
-('60b1b50452ec8', 'AL-Kautsar Selatan bawah', '003', '1B', 'Moh. Sahlan Ali Wafa, S.Pd.I', 'H. Mahfud Yusuf, S.Pd.I', 'SMP', '1', 'L'),
-('60b1b61fe5be8', 'AL-Kautsar Selatan bawah', '004', '2D', 'Munawar Nawawi, S.Pd', 'H. Mahfud Yusuf, S.Pd.I', 'SMP', '1', 'P'),
-('60bbcd20e1e41', 'AL-Ikhlas', '005', '2B', 'Moh. Adi Putra, S.Pd.I', 'H. Mahfud Yusuf, S.Pd.I', 'MA', '1', 'L');
+('60b1b50452ec8', 'AL-Kautsar Selatan bawah', '101', '1B', 'Moh. Sahlan Ali Wafa, S.Pd.I', 'H. Mahfud Yusuf, S.Pd.I', 'SMP', '1', 'L'),
+('60b1b61fe5be8', 'AL-Kautsar Selatan bawah', '104', '2D', 'Munawar Nawawi, S.Pd', 'H. Mahfud Yusuf, S.Pd.I', 'SMP', '1', 'P'),
+('60bbcd20e1e41', 'AL-Ikhlas', '005', '2B', 'Moh. Adi Putra, S.Pd.I', 'H. Mahfud Yusuf, S.Pd.I', 'MA', '1', 'L'),
+('61e91cf8352a5', 'AL-Kautsar Selatan bawah', '007', '2C', 'Taufiqur Rahman', 'H. Mahfud Yusuf, S.Pd.I', 'SMP', '1', 'L');
 
 -- --------------------------------------------------------
 
@@ -399,7 +419,8 @@ INSERT INTO `tb_ortu` (`id_ortu`, `nama_ayah`, `agama_ayah`, `tetala_ayah`, `pen
 ('605dc7822c102', 'Syarifudin', 'islam', 'Probolinggo,2021-03-01', 'SMP', 'Petani', '500000', '089237846273', 'Maryam', 'islam', 'Probolinggo,2021-03-01', 'SMP', 'Petani', '500000', '089237846273'),
 ('60840c8695860', 'Suratno', 'islam', 'Probolinggo,03-02-1970', 'SMA', 'PNS', '2000000', '087857642333', 'Suratni', 'islam', 'Probolinggo,03-02-1970', 'SMA', 'PNS', '2000000', '087585761233'),
 ('60bba395779f4', 'Rahmat', 'islam', 'Probolinggo,1969-02-12', 'SMA', 'Polisi', '2000000', '081982734888', 'Lesty', 'islam', 'Probolinggo,1969-02-12', 'SMA', 'Polisi', '2000000', '081982734888'),
-('60bbae1436557', 'Husen', 'islam', 'Jayapura,1970-02-26', 'SMP', 'Petani', '1000000', '085847523665', 'Sumiati', 'islam', 'Jayapura,1970-02-26', 'SMP', 'Petani', '1000000', '085847523665');
+('60bbae1436557', 'Husen', 'islam', 'Jayapura,1970-02-26', 'SMP', 'Petani', '1000000', '085847523665', 'Sumiati', 'islam', 'Jayapura,1970-02-26', 'SMP', 'Petani', '1000000', '085847523665'),
+('61e91b8cad027', 'saifi', 'islam', 'Probolinggo,1998-12-18', 'SMA', 'PNS', '5000000', '081853868777', 'laily', 'islam', 'Probolinggo,1998-12-18', 'SMA', 'PNS', '5000000', '081853868777');
 
 -- --------------------------------------------------------
 
@@ -460,7 +481,7 @@ CREATE TABLE `tb_pelanggaran` (
 INSERT INTO `tb_pelanggaran` (`code_pelanggaran`, `pelanggaran`, `hari`, `tgl`, `waktu`, `sanksi`, `tingkat`, `nis`, `sort`) VALUES
 ('606ae40cbe7f1', 'makan saat jam Pelajaran', 'Senin', '2021-04-01', '17:18:15', 'Membersihkan Kamar Mandi', 'Berat', '3543643523', 'kmi'),
 ('606ae67392998', 'Tidak mengikuti jadwal sholat Subuh', 'Senin', '2021-03-05', '17:27:49', 'Membersihkan Halaman Rumah Kyai', 'Ringan', '3543643523', 'peribadatan'),
-('606ae6b3e96c0', 'Menggunakan kata kata tidak pantas saat berada dalam lingkungan Pondokz', 'Senin', '2021-01-05', '17:29:20', 'Membersihkan Area lapangan selama 7 Hari', 'Sedang', '3543643523', 'bahasa'),
+('606ae6b3e96c0', 'Menggunakan kata kata tidak pantas saat berada dalam lingkungan Pondok', 'Senin', '2021-01-05', '17:29:20', 'Membersihkan Area lapangan selama 7 Hari', 'Sedang', '3543643523', 'bahasa'),
 ('6082c7c51a154', 'Tidur saat jam ibadah', 'Jum\'at', '2021-04-23', '20:12:26', 'Lari memutari lapangan 1000x', 'Sedang', '3543643523', 'pengasuhan'),
 ('60b1ac2480196', 'membuang sampah sembarangan', 'Sabtu', '2021-05-29', '09:50:21', 'membersihkan lapangan selama 2 minggu', 'Ringan', '3543643523', 'kebersihan'),
 ('60b1af1d30754', 'Memanjat pagar kabur dari pondok', 'Sabtu', '2021-05-29', '10:03:29', 'Membantu jaga malam', 'Sedang', '3543643523', 'keamanan'),
@@ -935,13 +956,13 @@ ALTER TABLE `tb_wali_ppdb`
 -- AUTO_INCREMENT for table `detaile`
 --
 ALTER TABLE `detaile`
-  MODIFY `id_detaile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_detaile` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `jadwal_alarm`
 --
 ALTER TABLE `jadwal_alarm`
-  MODIFY `code_ja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `code_ja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `tb_kode_ppdb`
