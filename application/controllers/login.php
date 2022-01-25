@@ -1,9 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Login extends CI_Controller
+{
 
-		public function __construct()
+	public function __construct()
 	{
 
 		parent::__construct();
@@ -15,7 +16,7 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
-			$this->form_validation->set_rules('user', 'username', 'trim|required|xss_clean');
+		$this->form_validation->set_rules('user', 'username', 'trim|required|xss_clean');
 		$this->form_validation->set_rules('pass', 'password', 'trim|required');
 
 		if ($this->form_validation->run() == FALSE) {
@@ -41,7 +42,7 @@ class Login extends CI_Controller {
 
 			if ($auth['level'] == 1) {
 				$sesi = [
-					'code_auth'=> $auth['code_auth'],
+					'code_auth' => $auth['code_auth'],
 					'nama' => $auth['nama'],
 					'level' => $auth['level']
 				];
@@ -52,7 +53,7 @@ class Login extends CI_Controller {
 
 				if ($auth['level'] == 2) {
 				$sesi = [
-					'code'=>$auth['code_auth'],
+					'code' => $auth['code_auth'],
 					'nama' => $auth['nama'],
 					'level' => $auth['level']
 				];
@@ -63,7 +64,7 @@ class Login extends CI_Controller {
 
 				if ($auth['level'] == 3) {
 				$sesi = [
-					'code_auth'=> $auth['code_auth'],
+					'code_auth' => $auth['code_auth'],
 					'nama' => $auth['nama'],
 					'level' => $auth['level']
 				];
@@ -74,18 +75,27 @@ class Login extends CI_Controller {
 
 			if ($auth['level'] == 4) {
 				$sesi = [
-					'code_auth'=> $auth['code_auth'],
+					'code_auth' => $auth['code_auth'],
 					'nama' => $auth['nama'],
 					'level' => $auth['level']
 				];
 
 				$this->session->set_userdata($sesi);
 				redirect('organtri/organtri');
-			} else	{
+			} else
 
-				//$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">username atau password anda salah</div>');
+			if ($auth['level'] == 5) {
+				$sesi = [
+					'code_auth' => $auth['code_auth'],
+					'nama' => $auth['nama'],
+					'level' => $auth['level']
+				];
+
+				$this->session->set_userdata($sesi);
+				redirect('poskestren/poskestren');
+			} else {
+
 				echo "<script>alert('username atau password anda salah');location='login'</script>";
-				//redirect('auth');
 			}
 		} else {
 			echo "<script>alert('username atau password anda salah');location='login'</script>";

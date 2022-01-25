@@ -66,4 +66,11 @@ class Crud_pelanggaran extends CI_Controller
 		$this->m_pelanggaran->ed_pel($where, $data, 'tb_pelanggaran');
 		echo "<script>alert('Data berhasil disimpan');location='../../pengasuhan/pengasuhan/$uri'</script>";
 	}
+	function h_pel()
+	{
+		$uri = $this->uri->segment(5);
+		$where = ['code_pelanggaran' => $this->uri->segment(4)];
+		$this->m_pelanggaran->h_pel($where, 'tb_pelanggaran');
+		echo "<script>alert('Data berhasil Dihapus');location='../../../pengasuhan/$uri'</script>";
+	}
 }

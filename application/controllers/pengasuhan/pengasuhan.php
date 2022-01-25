@@ -109,6 +109,90 @@ class Pengasuhan extends CI_Controller
 		$this->load->view('pengasuh/pp/index');
 		$this->load->view('template/footer', $data);
 	}
+	function pb()
+	{
+		$data['judul'] = "Data Pelanggaran Bahasa";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'bahasa');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/pb/index');
+		$this->load->view('template/footer', $data);
+	}
+	function pm()
+	{
+		$data['judul'] = "Data Pelanggaran Pengasuhan";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'kmi');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/pm/index');
+		$this->load->view('template/footer', $data);
+	}
+	function pi()
+	{
+		$data['judul'] = "Data Pelanggaran Peribadatan";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'peribadatan');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/pi/index');
+		$this->load->view('template/footer', $data);
+	}
+	function or()
+	{
+		$data['judul'] = "Data Pelanggaran Pengasuhan";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'olahraga');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/or/index');
+		$this->load->view('template/footer', $data);
+	}
+	function km()
+	{
+		$data['judul'] = "Data Pelanggaran Pengasuhan";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'keamanan');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/km/index');
+		$this->load->view('template/footer', $data);
+	}
+	function kb()
+	{
+		$data['judul'] = "Data Pelanggaran Pengasuhan";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+
+		$this->db->where('sort=', 'kebersihan');
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/kb/index');
+		$this->load->view('template/footer', $data);
+	}
 	function t_santri_konsulat()
 	{
 		$data['judul'] = "Data Santri";

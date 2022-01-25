@@ -8,7 +8,9 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		is_logged_in();
-
+		$tgl = date('Y-m-d H:i:s');
+		$this->db->query("UPDATE `perizinan` SET stat='1' where tgl_selesai < ?", $tgl);
+		$this->data = $this->db->query("SELECT code_perizinan,nis_perizinan,nis,nama,tgl_selesai FROM perizinan,tb_dsantri where perizinan.nis_perizinan = tb_dsantri.nis AND tgl_selesai < ?", $tgl)->result();
 
 		$this->load->library('session');
 		$this->load->model('m_jadwal');
@@ -113,7 +115,7 @@ class Admin extends CI_Controller
 
 		$data['tsantri'] = $this->m_dsantri->get_ortu();
 
-		
+
 		$data['klz'] = $this->m_kelas->get_kelas();
 
 
@@ -129,7 +131,7 @@ class Admin extends CI_Controller
 		if (isset($_POST['cari'])) {
 			$data['v_data']	 = $this->m_dsantri->cariajax($this->input->post('kelass'));
 			$this->load->view('admin/santri_k/data', $data);
-		}else {
+		} else {
 			echo "Silahkan Cek koneksi internet Anda!";
 		}
 	}
@@ -712,7 +714,7 @@ class Admin extends CI_Controller
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 
 
-		
+
 		$data['Aextra'] = $this->m_extra->no_extra();
 
 		$data['ext'] = $this->m_extra->get_extra();
@@ -730,6 +732,9 @@ class Admin extends CI_Controller
 		$data['dsantri'] = $this->m_dsantri->get_santri();
 
 		$this->db->where('tb_kamar.gender=', 'L');
+		$data['kmrr'] = $this->m_kamar->get_kamar();
+
+		$this->db->where('tb_kamar.gender=', 'L');
 		$data['kmr'] = $this->m_kamar->get_Akamar();
 
 
@@ -743,6 +748,9 @@ class Admin extends CI_Controller
 		$data['judul'] = "Data Kamar Perempuan";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 		$data['dsantri'] = $this->m_dsantri->get_santri();
+
+		$this->db->where('tb_kamar.gender=', 'P');
+		$data['kmrr'] = $this->m_kamar->get_kamar();
 
 
 		$this->db->where('tb_kamar.gender=', 'P');
@@ -764,7 +772,7 @@ class Admin extends CI_Controller
 		$this->db->where('tb_kelas.gender=', 'L');
 		$data['kls'] = $this->m_kelas->get_Akelas();
 
-		$this->db->where('tb_kelas.gender=', 'L');
+		$this->db->where('tb_kelas.gender=', 'P');
 		$data['klas'] = $this->m_kelas->get_kelas();
 
 
@@ -779,6 +787,8 @@ class Admin extends CI_Controller
 		$data['judul'] = "Data Kelas";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 
+		$this->db->where('tb_kelas.gender=', 'L');
+		$data['klas'] = $this->m_kelas->get_kelas();
 
 		$this->db->where('tb_kelas.gender=', 'P');
 		$data['kls'] = $this->m_kelas->get_Akelas();

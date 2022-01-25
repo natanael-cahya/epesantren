@@ -61,6 +61,57 @@ class Pengajar extends CI_Controller
 		$this->load->view('pengajar/kelas/index');
 		$this->load->view('template/footer', $data);
 	}
+	function santri_k()
+	{
+		$data['judul'] = "Data Santri";
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$data['santri'] = $this->m_dsantri->get_Asantri();
+		$data['kmar'] = $this->m_kamar->get_kamar();
+		$data['kls'] = $this->m_kelas->get_kelas();
+
+		$data['tsantri'] = $this->m_dsantri->get_ortu();
+
+
+		$data['klz'] = $this->m_kelas->get_kelas();
+
+
+		//$data['klz1'] = $this->m_kelas->get_kelas();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s2', $data);
+		$this->load->view('pengajar/santri_k/index');
+		$this->load->view('template/footer', $data);
+	}
+	function upd_kelas()
+	{
+		$nis = $this->input->post('p_nis');
+		$kls_p = $this->input->post('opsi_s');
+
+		if (empty($nis)) {
+			echo "<script>alert('Pilih minimal 1 Santri/Wati');location='../pengajar/santri_k'</script>";
+		} else
+		if (empty($kls_p)) {
+			echo "<script>alert('Pilih Tujuan Kelas');location='../pengajar/santri_k'</script>";
+		} else
+		if ($kls_p == 'Alumni') {
+			$nis = $this->input->post('p_nis');
+			$kls_p = $this->input->post('opsi_s');
+			$nis = implode(",", $nis);
+
+			//var_dump($nis);die();
+			$this->m_dsantri->upd_kelasA($kls_p, $nis);
+			echo "<script>alert('Data berhasil disimpan');location='../pengajar/santri_k'</script>";
+		} else {
+			$nis = $this->input->post('p_nis');
+			$kls_p = $this->input->post('opsi_s');
+			$nis = implode(",", $nis);
+
+			//var_dump($nis);die();
+			$this->m_dsantri->upd_kelas($kls_p, $nis);
+			echo "<script>alert('Data berhasil disimpan');location='../pengajar/santri_k'</script>";
+		}
+	}
 	function kelas_p()
 	{
 		$data['judul'] = "Data Kelas";

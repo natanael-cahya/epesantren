@@ -47,12 +47,12 @@ class Crud_ortu extends CI_Controller
 			'no_hp_ayah' => $no_a,
 			'nama_ibu'	=> $ibu,
 			'nama_ayah' => $ayah,
-			'agama_ibu' => $agama_a,
-			'tetala_ibu' => $tempat_a . ',' . $tgl_a,
-			'pend_akhir_ibu' => $pendidikan_a,
-			'pekerjaan_ibu' => $pekerjaan_a,
-			'penghasilan_ibu' => $penghasilan_a,
-			'no_hp_ibu' => $no_a,
+			'agama_ibu' => $agama_i,
+			'tetala_ibu' => $tempat_i . ',' . $tgl_i,
+			'pend_akhir_ibu' => $pendidikan_i,
+			'pekerjaan_ibu' => $pekerjaan_i,
+			'penghasilan_ibu' => $penghasilan_i,
+			'no_hp_ibu' => $no_i,
 
 		);
 
@@ -91,12 +91,12 @@ class Crud_ortu extends CI_Controller
 			'no_hp_ayah' => $no_a,
 			'nama_ibu'	=> $ibu,
 			'nama_ayah' => $ayah,
-			'agama_ibu' => $agama_a,
+			'agama_ibu' => $agama_i,
 			'tetala_ibu' => $ttl_i,
-			'pend_akhir_ibu' => $pendidikan_a,
-			'pekerjaan_ibu' => $pekerjaan_a,
-			'penghasilan_ibu' => $penghasilan_a,
-			'no_hp_ibu' => $no_a,
+			'pend_akhir_ibu' => $pendidikan_i,
+			'pekerjaan_ibu' => $pekerjaan_i,
+			'penghasilan_ibu' => $penghasilan_i,
+			'no_hp_ibu' => $no_i,
 			'nis'	=> $nis,
 		);
 		$where = ['id_ortu' => $idd];

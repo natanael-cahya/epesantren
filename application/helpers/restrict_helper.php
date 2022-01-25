@@ -41,3 +41,13 @@ function pengajar_check()
         redirect('login');
     }
 }
+function poskestren_check()
+{
+    $ci = get_instance();
+    if (!$ci->session->userdata('level')) {
+        redirect('login');
+    } else
+    if ($ci->session->userdata('level') != 5) {
+        redirect('login');
+    }
+}

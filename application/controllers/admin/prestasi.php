@@ -8,6 +8,9 @@ class Prestasi extends CI_Controller
 	{
 		parent::__construct();
 		is_logged_in();
+		$tgl = date('Y-m-d H:i:s');
+		$this->db->query("UPDATE `perizinan` SET stat='1' where tgl_selesai < ?", $tgl);
+		$this->data = $this->db->query("SELECT code_perizinan,nis_perizinan,nis,nama,tgl_selesai FROM perizinan,tb_dsantri where perizinan.nis_perizinan = tb_dsantri.nis AND tgl_selesai < ?", $tgl)->result();
 
 
 		$this->load->library('session');

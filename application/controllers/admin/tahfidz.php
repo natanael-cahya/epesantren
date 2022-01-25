@@ -8,6 +8,9 @@ class Tahfidz extends CI_Controller
 	{
 		parent::__construct();
 		is_logged_in();
+		$tgl = date('Y-m-d H:i:s');
+		$this->db->query("UPDATE `perizinan` SET stat='1' where tgl_selesai < ?", $tgl);
+		$this->data = $this->db->query("SELECT code_perizinan,nis_perizinan,nis,nama,tgl_selesai FROM perizinan,tb_dsantri where perizinan.nis_perizinan = tb_dsantri.nis AND tgl_selesai < ?", $tgl)->result();
 
 		$this->load->library('session');
 		$this->load->model('M_tahfidz');
@@ -29,17 +32,21 @@ class Tahfidz extends CI_Controller
 	{
 		$nis = $this->input->post('nis');
 		$stat = $this->input->post('stat');
+		$pmb = $this->input->post('pmb');
 		$ayat = $this->input->post('ayat');
+		$ayatt = $this->input->post('ayatt');
 		$surat = $this->input->post('surat');
 		$juz = $this->input->post('juz');
 
 		$data = array(
 			'code_tahfidz'   => uniqid(),
 			'nis_tahfidz'    => $nis,
+			'pembimbing'		=> $pmb,
 			'status_tahfidz' => $stat,
-			'ayat'			 => $ayat,
+			'ayat'			 => $ayat . '-' . $ayatt,
 			'surat'			 => $surat,
-			'juz'			 => $juz
+			'juz'			 => $juz,
+			'tgl_input'		 => date('Y-m-d')
 
 		);
 
@@ -52,12 +59,14 @@ class Tahfidz extends CI_Controller
 		$nise = $this->input->post('nise');
 		$state = $this->input->post('state');
 		$ayate = $this->input->post('ayate');
+		$pmbe = $this->input->post('pmbe');
 		$surate = $this->input->post('surate');
 		$juze = $this->input->post('juze');
 		$idx = $this->input->post('idx');
 
 		$data = array(
 			'nis_tahfidz'		=> $nise,
+			'pembimbing'		=> $pmbe,
 			'status_tahfidz'	=> $state,
 			'ayat'				=> $ayate,
 			'surat'				=> $surate,
