@@ -65,7 +65,7 @@
                                                 <td><?= $key->no_kls ?></td>
                                                 <td><?= $key->kelass ?></td>
                                                 <td><?= $key->wali_kelas ?></td>
-                                                <td><?= $key->asisten ?></td>
+                                                x <td><?= $key->asisten ?></td>
                                                 <td style="width:10%;">
                                                     <div class="row">
 
