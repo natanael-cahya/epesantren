@@ -23,6 +23,18 @@ class M_kelas extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function get_kelas_umum()
+	{
+		$this->db->select('*');
+		$this->db->from('tb_kelas');
+		$this->db->from('tb_dsantri');
+		$this->db->where('tb_dsantri.kelas=tb_kelas.code_kelas');
+
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	function get_kelass()
 	{
 		$this->db->select('*');
@@ -31,7 +43,7 @@ class M_kelas extends CI_Model
 		$this->db->from('tb_dsantri');
 		$this->db->where('tb_dsantri.kelas=tb_kelas.code_kelas');
 		$this->db->where('tb_kelas.lembaga=tb_lembaga.id_lembaga');
-	
+
 
 		$query = $this->db->get();
 		return $query->result();
@@ -54,13 +66,20 @@ class M_kelas extends CI_Model
 		$this->db->insert($table, $data);
 	}
 	function ed_kelas($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table, $data);
-    }
+	{
+		$this->db->where($where);
+		$this->db->update($table, $data);
+	}
+
+
 	function h_kelas($where, $table)
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
+	}
+
+	function edit_data($where, $table)
+	{
+		return $this->db->get_where($table, $where);
 	}
 }

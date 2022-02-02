@@ -27,7 +27,7 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-						<div class="d-flex align-items-center">
+							<div class="d-flex align-items-center">
 								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalpp">
 									<i class="fa fa-plus"></i>
 									Tambah Data
@@ -64,12 +64,15 @@
 													<td><?= $n++; ?></td>
 													<td><?= $l->nama ?></td>
 													<td><?= $l->prestasi ?></td>
-													<td><?= date('d-m-Y',strtotime($l->tgl)); ?> </td>
-													
+													<td><?= date('d-m-Y', strtotime($l->tgl)); ?> </td>
+
 
 													<td style="width:10%;">
 														<div class="row">
-															<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalsantriz<?= $l->code_prestasi ?>"><i class="fa fa-edit"></i></button>
+															<a class="btn btn-primary btn-xs text-white ml-1" href="<?= base_url('admin/admin/edit_prestasi/');
+																													echo $l->code_prestasi . '/' . $this->uri->segment(4) ?>"><i class="fa fa-edit"></i></a>
+
+
 															<a href="<?= base_url('admin/prestasi/delete/');
 																		echo $l->code_prestasi  ?>" class="btn btn-danger btn-sm text-white ml-1"><i class="fa fa-trash"></i> </a>
 														</div>
@@ -83,12 +86,12 @@
 								</div>
 							</div>
 						</div>
-											</div>
-											</div>
-											</div>
-                                            </div>
-                                            </div>
-				
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 
 
@@ -106,19 +109,19 @@
 				<div class="modal-body">
 
 					<form name="f1" method="post" action="<?= base_url('admin/laporan/l_ps'); ?>">
-						<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Dari Tanggal</label>
 								<input type="date" name="ds" class="form-control">
 							</div>
 						</div><br>
-						<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Sampai tanggal</label>
 								<input type="date" name="de" class="form-control">
 							</div>
 						</div>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
@@ -126,7 +129,7 @@
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 
 	<!-- Modal -->
@@ -142,19 +145,19 @@
 				<div class="modal-body">
 
 					<form name="f1" method="post" action="<?= base_url('admin/laporan/export_prestasi'); ?>">
-					<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Dari Tanggal</label>
 								<input type="date" name="ds" class="form-control">
 							</div>
 						</div><br>
-						<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Sampai tanggal</label>
 								<input type="date" name="de" class="form-control">
 							</div>
 						</div>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
@@ -162,7 +165,7 @@
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 
 
@@ -178,50 +181,50 @@
 						</button>
 					</div>
 					<div class="modal-body">
-							<form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/prestasi/edit'); ?>">
-								<div class="row">
-									<div class="col">
-										<label for="nis">NIS</label>
-										<a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ep","Ratting",
+						<form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/prestasi/edit'); ?>">
+							<div class="row">
+								<div class="col">
+									<label for="nis">NIS</label>
+									<a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ep","Ratting",
 						"width=950,height=570,toolbar=1,status=1,");'>
-											<input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $l->nis ?>" class="form-control" id="nisee" placeholder="NIS">
-										</a>
+										<input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $l->nis ?>" class="form-control" id="nisee" placeholder="NIS">
+									</a>
 
-									</div>
 								</div>
-								<br>
-								<div class="row">
-									<div class="col">
-										<label for="nama">Nama</label>
-										<input type="text" name="" class="form-control" value="<?= $l->nama ?>" readonly id="nama" placeholder="Nama">
-									</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<label for="nama">Nama</label>
+									<input type="text" name="" class="form-control" value="<?= $l->nama ?>" readonly id="nama" placeholder="Nama">
 								</div>
-								<br>
-								<div class="row">
+							</div>
+							<br>
+							<div class="row">
 
-									<div class="col">
-										<label for="foto">Prestasi</label>
-										<input type="text" name="pres" class="form-control" value="<?= $l->prestasi ?>">
-									</div>
+								<div class="col">
+									<label for="foto">Prestasi</label>
+									<input type="text" name="pres" class="form-control" value="<?= $l->prestasi ?>">
 								</div>
-								<br>
-								<div class="row">
-									<div class="col">
-										<label for="alamat">Tanggal Input</label>
-										<input type="text" name="tgl" value="<?= $l->tgl ?>" class="form-control datepicker" id="alamat" placeholder="Alamat">
-										
-										<input type="hidden" name="idx" value="<?= $l->code_prestasi?>">
-									</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<label for="alamat">Tanggal Input</label>
+									<input type="text" name="tgl" value="<?= $l->tgl ?>" class="form-control datepicker" id="alamat" placeholder="Alamat">
+
+									<input type="hidden" name="idx" value="<?= $l->code_prestasi ?>">
 								</div>
-								<br>
-								
-							
+							</div>
+							<br>
+
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
 						<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
 						</form>
-					
+
 					</div>
 				</div>
 			</div>
@@ -255,19 +258,19 @@
 							</div>
 
 						</div><br>
-						<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Prestasi</label>
 								<textarea class="form-control" name="prestasi"></textarea>
 							</div>
 						</div><br>
-						<div class="row">	
+						<div class="row">
 							<div class="col">
 								<label for="foto">Tanggal Input</label>
 								<input type="text" name="tgl" value="<?= date('Y-m-d') ?>" readonly class="form-control">
 							</div>
 						</div>
-					
+
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
@@ -275,7 +278,7 @@
 					</form>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 
 

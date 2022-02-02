@@ -18,6 +18,15 @@ class M_tahfidz extends CI_Model
 		// $this->db->join('tb_dsantri','tahfidz.nis_tahfidz=tb_dsantri.nis');
 		return $this->db->query("SELECT * FROM (SELECT * FROM `tahfidz` order by tgl_input desc LIMIT 18446744073709551615) as c,tb_dsantri where nis_tahfidz=tb_dsantri.nis group by nis_tahfidz")->result();
 	}
+	function get_Atahfidz()
+	{
+		$this->db->from('tahfidz');
+		$this->db->from('tb_dsantri');
+		$this->db->where('tahfidz.nis_tahfidz = tb_dsantri.nis');
+
+		$query = $this->db->get();
+		return $query->result();
+	}
 	function tb_data($data, $table)
 	{
 		$this->db->insert($table, $data);

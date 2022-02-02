@@ -34,7 +34,7 @@
     $array = "var data = new Array();\n";
     foreach ($esantri as $row) {
         $m = $row->nis;
-        $array .= "data['" . $row->nis . "'] = {nama : '" . $row->nama . "'};\n";
+        $array .= "data['" . $row->nis . "'] = {nama : '" . $row->nama . "',alamat : '" . $row->alamat . "'};\n";
     }
 
     ?>
@@ -44,6 +44,7 @@
     function etangkap(s) {
 
         opener.document.getElementById('nama').value = data[s].nama;
+        opener.document.getElementById('alamat').value = data[s].alamat;
         opener.document.getElementById('nisee').value = s;
         self.close();
     }

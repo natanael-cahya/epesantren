@@ -52,8 +52,8 @@
                                         </thead>
                                         <tbody>
                                             <?php $hh = 1;
-											foreach ($akun as $key) :
-												$ik = $key->level; ?>
+                                            foreach ($akun as $key) :
+                                                $ik = $key->level; ?>
 
                                             <tr>
                                                 <td><?= $hh++; ?></td>
@@ -61,21 +61,21 @@
                                                 <td><?= $key->username ?></td>
 
                                                 <td><?php if ($ik == 1) {
-															echo "Administrator";
-														} else if ($ik == 2) {
-															echo "Staff Pengasuhan";
-														} else if ($ik == 3) {
-															echo "Staff Pengajaran";
-														} else if ($ik == 4) {
-															echo "Organtri";
-														} else {
-															echo "Poskestren";
-														} ?></td>
+                                                            echo "Administrator";
+                                                        } else if ($ik == 2) {
+                                                            echo "Staff Pengasuhan";
+                                                        } else if ($ik == 3) {
+                                                            echo "Staff Pengajaran";
+                                                        } else if ($ik == 4) {
+                                                            echo "Organtri";
+                                                        } else {
+                                                            echo "Poskestren";
+                                                        } ?></td>
                                                 <td><?php if ($key->gender == 'L') {
-															echo "Ismah";
-														} else {
-															echo "Iswah";
-														} ?></td>
+                                                            echo "Ismah";
+                                                        } else {
+                                                            echo "Iswah";
+                                                        } ?></td>
                                                 <td>
                                                     <div class="row">
 
@@ -231,12 +231,14 @@
                             <div class="col">
                                 <label for="lvl">Tingakatan AKun</label>
                                 <select name="lvl" class="form-control" required>
-                                    <option value="<?= $key->level ?>">-Jangan diubah bila tak ingin di ganti-</option>
-                                    <option value="1">Administrator</option>
-                                    <option value="2">Staff Pengasuhan</option>
-                                    <option value="3">Staff Pengajaran</option>
-                                    <option value="4">Organisasi Santri</option>
-                                    <option value="5">Poskestren</option>
+                                    <option <?= $key->level == 1 ? 'selected' : '' ?> value="1">Administrator</option>
+                                    <option <?= $key->level == 2 ? 'selected' : '' ?> value="2">Staff Pengasuhan
+                                    </option>
+                                    <option <?= $key->level == 3 ? 'selected' : '' ?> value="3">Staff Pengajaran
+                                    </option>
+                                    <option <?= $key->level == 4 ? 'selected' : '' ?> value="4">Organisasi Santri
+                                    </option>
+                                    <option <?= $key->level == 5 ? 'selected' : '' ?> value="5">Poskestren</option>
                                 </select>
 
                             </div>
@@ -246,9 +248,9 @@
                             <div class="col">
                                 <label for="gender">Gender</label>
                                 <select name="gender" class="form-control">
-                                    <option value="<?= $key->gender ?>">-Jangan Diubah bila tak ingin Diganti-</option>
-                                    <option value="L">Laki - Laki</option>
-                                    <option value="P">Perempuan</option>
+                                    <option <?= $key->gender == 'L' ? 'selected' : '' ?> value="L">Laki - Laki
+                                    </option>
+                                    <option <?= $key->gender == 'P' ? 'selected' : '' ?> value="P">Perempuan</option>
                                 </select>
                             </div>
                         </div>

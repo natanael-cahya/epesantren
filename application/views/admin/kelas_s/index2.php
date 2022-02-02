@@ -45,8 +45,15 @@
                             <div class="d-flex align-items-center">
                                 &nbsp;&nbsp;&nbsp;&nbsp;Filter : &nbsp;<select id="fil">
                                     <option value="">Semua Data</option>
-                                    <?php foreach ($klas as $q) { ?>
-                                    <option><?= $q->nama_kelas ?></option>
+                                    <?php foreach ($filz as $ka) { ?>
+                                    <option value="<?= $ka->kelass ?>">
+                                        <?php echo $ka->nama_kelas . ' - No: ' . $ka->no_kls . ' - [' . $ka->kelass . ']';
+                                            if ($ka->gender == 'L') {
+                                                echo " - (ISMAH)";
+                                            } else {
+                                                echo " - (ISWAH)";
+                                            }  ?>
+                                    </option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -81,10 +88,10 @@
                                                 <td><?= $key->asisten ?></td>
                                                 <td>
                                                     <div class="row">
-
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $key->nis ?>">Edit</button>
+                                                        <a class="btn btn-primary btn-xs text-white ml-1"
+                                                            href="<?= base_url('admin/admin/edit_kelas_ismah_umum/');
+                                                                                                                    echo $key->nis . '/' . $this->uri->segment(4) . '/P' ?>"><i
+                                                                class="fa fa-edit"></i></a>
 
 
                                                     </div>
@@ -144,8 +151,15 @@
                             <div class="col">
                                 <label for="alamat">Kelas</label>
                                 <select name="klse" class="form-control">
-                                    <?php foreach ($kls as $o) { ?>
-                                    <option value="<?= $o->code_kelas ?>"><?= $o->nama_kelas ?></option>
+                                    <?php foreach ($kls as $ka) { ?>
+                                    <option value="<?= $ka->code_kelas ?>">
+                                        <?php echo $ka->nama_kelas . ' - No: ' . $ka->no_kls . ' - [' . $ka->kelass . ']';
+                                                if ($ka->gender == 'L') {
+                                                    echo " - (ISMAH)";
+                                                } else {
+                                                    echo " - (ISWAH)";
+                                                }  ?>
+                                    </option>
                                     <?php } ?>
                                 </select>
                                 <input type="hidden" name="urie" value="<?= $this->uri->segment(3) ?>">

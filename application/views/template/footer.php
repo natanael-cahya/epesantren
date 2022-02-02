@@ -133,9 +133,6 @@ function waktu() {
     document.getElementById("menit").innerHTML = waktu.getMinutes();
     document.getElementById("detik").innerHTML = waktu.getSeconds();
 
-    document.getElementById("jem").innerHTML = waktu.getHours();
-    document.getElementById("mnit").innerHTML = waktu.getMinutes();
-    document.getElementById("dtik").innerHTML = waktu.getSeconds();
 
 
 }

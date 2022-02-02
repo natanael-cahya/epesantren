@@ -24,6 +24,9 @@ class Admin extends CI_Controller
 		$this->load->model('m_guru');
 		$this->load->model('m_extra');
 		$this->load->model('m_group');
+		$this->load->model('m_tahfidz');
+		$this->load->model('m_perizinan');
+		$this->load->model('m_prestasi');
 	}
 
 
@@ -334,6 +337,19 @@ class Admin extends CI_Controller
 		$this->load->view('admin/extra/e_guru', $data);
 		$this->load->view('template/footer', $data);
 	}
+	function eguru2()
+	{
+		$data['judul'] = "Data Guru";
+
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('admin/extra/e_guru2', $data);
+		$this->load->view('template/footer', $data);
+	}
+
+
 	function tsantri()
 	{
 		$data['judul'] = "Data Santri";
@@ -693,6 +709,452 @@ class Admin extends CI_Controller
 		$this->load->view('admin/extra/index');
 		$this->load->view('template/footer', $data);
 	}
+
+	function edit_extra()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Extrakurikuler";
+		$where = ['code_extra' => $this->uri->segment(4)];
+		$data['extra2'] = $this->m_extra->edit_data($where, 'tb_extra')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/extra/editextra', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+
+
+	function edit_kelas_ismah()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kelas Ismah";
+		$where = ['code_kelas' => $this->uri->segment(4)];
+		$data['kls'] = $this->m_kelas->edit_data($where, 'tb_kelas')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['lembaga'] = $this->m_group->get_lembaga();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kelas/editkelasismah', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+
+	function edit_kelas_iswah()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Iswah";
+		$where = ['code_kelas' => $this->uri->segment(4)];
+		$data['kls'] = $this->m_kelas->edit_data($where, 'tb_kelas')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['lembaga'] = $this->m_group->get_lembaga();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kelas/editkelasiswah', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_kamar_ismah()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kamar Ismah";
+		$where = ['code_kamar' => $this->uri->segment(4)];
+		$data['kmr'] = $this->m_kelas->edit_data($where, 'tb_kamar')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kamar/editkamarismah', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_kamar_iswah()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kamar Iswah";
+		$where = ['code_kamar' => $this->uri->segment(4)];
+		$data['kmr'] = $this->m_kelas->edit_data($where, 'tb_kamar')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kamar/editkamariswah', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_kelas_ismah_umum()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kelas (Umum)";
+		$par = $this->uri->segment(4);
+		$ur = $this->uri->segment(5);
+		if ($ur == 'L') {
+			$this->db->where('tb_dsantri.nis=', $par);
+			$this->db->where('tb_kelas.gender=', 'L');
+			$data['kls'] = $this->m_kelas->get_Akelas();
+
+			$this->db->group_by('tb_kelas.nama_kelas');
+			$this->db->where('tb_kelas.gender=', 'L');
+			$data['klz'] = $this->m_kelas->get_Akelas();
+
+			$data['esantri'] = $this->m_dsantri->get_Asantri();
+		} else {
+			$this->db->where('tb_dsantri.nis=', $par);
+			$this->db->where('tb_kelas.gender=', 'P');
+			$data['kls'] = $this->m_kelas->get_Akelas();
+
+			$this->db->group_by('tb_kelas.nama_kelas');
+			$this->db->where('tb_kelas.gender=', 'P');
+			$data['klz'] = $this->m_kelas->get_Akelas();
+
+			$data['esantri'] = $this->m_dsantri->get_Asantri();
+		}
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kelas_s/editkelasismahhh', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_kamar_ismah_umum()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kamar Ismah (Umum)";
+		$where = ['nis' => $this->uri->segment(4)];
+		$data['kls'] = $this->m_kelas->edit_data($where, 'tb_dsantri')->result();
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+
+		$this->db->where('gender=', 'L');
+		$data['kmr'] = $this->m_kamar->get_kamar();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kamar_s/editkamarismahhh', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_kamar_iswah_umum()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kamar Iswah (Umum)";
+		$where = ['nis' => $this->uri->segment(4)];
+		$data['kls'] = $this->m_kelas->edit_data($where, 'tb_dsantri')->result();
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+
+		$this->db->where('gender=', 'P');
+		$data['kmr'] = $this->m_kamar->get_kamar();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kamar_s/editkamariswahhh', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+
+	function edit_extra_umum()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Extra (Umum)";
+
+		$data['kmr'] = $this->m_kamar->get_kamar();
+
+		$this->db->where('detaile.id_detaile=', $this->uri->segment(4));
+		$data['Aextra'] = $this->m_extra->get_Aextra();
+
+		$data['ext'] = $this->m_extra->get_extra();
+
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/extra/editextraumum', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_konsulat()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Konsulat";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN CODE_KONSULAT
+		$data['konsulat'] = $this->m_konsulat->get_Akonsulat();
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/konsulat/editkonsulat', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_tahfidz()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Tahfidz";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_tahfidz
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_tahfidz->get_tahfidz();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/tahfidz/edittahfidz', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_perizinan()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Perizinan";
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_perizinan
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$ur = $this->uri->segment(4);
+		$this->db->where('code_perizinan=', $ur);
+		$data['pp'] = $this->m_perizinan->get_perizinan();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/perizinan/editperizinan', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_prestasi()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Prestasi";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_prestasi
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$this->db->where('code_prestasi=', $this->uri->segment(4));
+		$data['pp'] = $this->m_prestasi->get_prestasi();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/prestasi/editprestasi', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_pp()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Pengasuhan";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/pp/editpp', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_pm()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran KMI";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/pm/editpm', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_pb()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Bahasa";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/pb/editpb', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_pi()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Peribadatan";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/pi/editpi', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_or()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Olahraga";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/or/editor', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_km()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Olahraga";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/km/editkm', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+
+	function edit_kb()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran Kebersihan";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar', $data);
+		$this->load->view('admin/kb/editkb', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	function extra_s()
 	{
 		$data['judul'] = "Data Extrakurikuler";
@@ -731,6 +1193,7 @@ class Admin extends CI_Controller
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 		$data['dsantri'] = $this->m_dsantri->get_santri();
 
+		//$this->db->group_by('tb_kamar');
 		$this->db->where('tb_kamar.gender=', 'L');
 		$data['kmrr'] = $this->m_kamar->get_kamar();
 
@@ -769,6 +1232,10 @@ class Admin extends CI_Controller
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 
 
+		$this->db->group_by('nama_kelas');
+		$this->db->where('tb_kelas.gender=', 'L');
+		$data['filz'] = $this->m_kelas->get_Akelas();
+
 		$this->db->where('tb_kelas.gender=', 'L');
 		$data['kls'] = $this->m_kelas->get_Akelas();
 
@@ -789,6 +1256,10 @@ class Admin extends CI_Controller
 
 		$this->db->where('tb_kelas.gender=', 'L');
 		$data['klas'] = $this->m_kelas->get_kelas();
+
+		$this->db->group_by('nama_kelas');
+		$this->db->where('tb_kelas.gender=', 'P');
+		$data['filz'] = $this->m_kelas->get_Akelas();
 
 		$this->db->where('tb_kelas.gender=', 'P');
 		$data['kls'] = $this->m_kelas->get_Akelas();

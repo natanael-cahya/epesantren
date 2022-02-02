@@ -46,8 +46,15 @@
                             <div class="d-flex align-items-center">
                                 &nbsp;&nbsp;&nbsp;&nbsp;Filter : &nbsp;<select id="fil">
                                     <option value="">Semua Data</option>
-                                    <?php foreach ($klas as $q) { ?>
-                                    <option><?= $q->nama_kelas ?></option>
+                                    <?php foreach ($filz as $ka) { ?>
+                                    <option value="<?= $ka->kelass ?>">
+                                        <?php echo $ka->nama_kelas . ' - No: ' . $ka->no_kls . ' - [' . $ka->kelass . ']';
+                                            if ($ka->gender == 'L') {
+                                                echo " - (ISMAH)";
+                                            } else {
+                                                echo " - (ISWAH)";
+                                            }  ?>
+                                    </option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -85,10 +92,10 @@
                                                 <td>
                                                     <div class="row">
 
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $key->nis ?>">Edit</button>
-
+                                                        <a class="btn btn-primary btn-xs text-white ml-1"
+                                                            href="<?= base_url('admin/admin/edit_kelas_ismah_umum/');
+                                                                                                                    echo $key->nis . '/' . $this->uri->segment(4) . '/L' ?>"><i
+                                                                class="fa fa-edit"></i></a>
 
                                                     </div>
                                                 </td>
@@ -119,8 +126,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <? php // foreach ($kls as $k) { 
-                        ?>
+
                     <form name="f1" method="post" enctype="multipart/form-data"
                         action="<?= base_url('admin/crud_kelas/ed_kls'); ?>">
                         <div class="row">
@@ -163,48 +169,9 @@
                     </button>
                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
                     </form>
-                    <? php // } 
-                        ?>
+
                 </div>
             </div>
         </div>
     </div>
     <?php } ?>
-
-    <script>
-    <?php
-
-        $array = "var data = new Array();\n";
-        foreach ($esantri as $row) {
-            $m = $row->nis;
-            $array .= "data['" . $row->nis . "'] = {nama :'" . $row->nama . "'};\n";
-        }
-
-        echo $array; ?>
-
-    function ambilnise(nise1) {
-        document.getElementById('nama').value = data[nis].nama;
-
-
-    };
-    <?php
-
-        $array = "var data = new Array();\n";
-        foreach ($tsantri as $row) {
-            $m = $row->nis;
-            $array .= "data['" . $row->nis . "'] = {id_ortu :'" . $row->id_ortu . "',nama_ayah :'" . $row->nama_ayah  . "' , nama_ibu:'" .  $row->nama_ibu . "' , pekerjaan_ayah:'" .  $row->pekerjaan_ayah . "' , penghasilan_ayah:'" .  $row->penghasilan_ayah + $row->penghasilan_ibu . "' , no_hp_ayah:'" .  $row->no_hp_ayah . "'};\n";
-        }
-
-        echo $array; ?>
-
-    function ambilnis(ns) {
-        document.getElementById('id_ortu').value = data[nis].id_ortu;
-        document.getElementById('nama_ayah').value = data[nis].nama_ayah;
-        document.getElementById('nama_ibu').value = data[nis].nama_ibu;
-        document.getElementById('pekerjaan_ayah').value = data[nis].pekerjaan_ayah;
-        document.getElementById('penghasilan_ayah').value = data[nis].penghasilan_ayah;
-        document.getElementById('no_hp_ayah').value = data[nis].no_hp_ayah;
-
-
-    };
-    </script>

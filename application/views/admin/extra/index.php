@@ -62,7 +62,9 @@
                                                     <td>
                                                         <div class="row">
 
-                                                            <a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modaledit<?= $ex->code_extra ?>"><i class="fa fa-edit"></i> </a>
+                                                            <!-- <a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modaledit<?= $ex->code_extra ?>"><i class="fa fa-edit"></i> </a> -->
+                                                            <a href="<?= base_url('admin/admin/edit_extra/');
+                                                                        echo $ex->code_extra ?>" class="btn btn-primary btn-sm text-white ml-1"><i class="fa fa-edit"></i> </a>
                                                             <a href="<?= base_url('admin/crud_extra/h_extra/');
                                                                         echo $ex->code_extra ?>" class="btn btn-danger btn-sm text-white ml-1"><i class="fa fa-trash"></i> </a>
 
@@ -134,14 +136,14 @@
                                                                 echo $ex->code_extra ?>">
                             <div class="row">
                                 <div class="col">
-                                    <label for="ss">Nama Extrakurikuler</label>
+                                    <label for="ss">Nama Extrakurikuler kkk</label>
                                     <input type="text" value="<?= $ex->nama_extra; ?>" class="form-control" name="exe" placeholder="" required>
                                 </div>
                                 <div class="col">
-                                    <label for="ff">Pembimbing Extra</label>
-                                    <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR" onClick='javascript:window.open("eguru","Ratting",
+                                    <label for="ff">Pembimbing Extra sf</label>
+                                    <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR" onClick='javascript:window.open("eguru2","Ratting",
 						"width=750,height=570,toolbar=1,status=1,");'>
-                                        <input type="text" value="<?= $ex->nama_pembimbing; ?>" class="form-control" id="pee" name="pee" required placeholder="Nama Pembimbing">
+                                        <input type="text" value="<?= $ex->nama_pembimbing; ?>" class="form-control" id="pe" name="pe" required placeholder="Nama Pembimbing">
                                     </a>
                                 </div>
                             </div>

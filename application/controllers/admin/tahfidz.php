@@ -22,6 +22,7 @@ class Tahfidz extends CI_Controller
 		$data['judul'] = "Tahfidz";
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
 		$data['pp'] = $this->M_tahfidz->get_tahfidz();
+		$data['al'] = $this->M_tahfidz->get_Atahfidz();
 
 		$this->load->view('template/header', $data);
 		$this->load->view('template/sidebar', $data);

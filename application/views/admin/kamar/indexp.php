@@ -61,7 +61,9 @@
 													<td>
 														<div class="row">
 
-															<a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modaled<?= $key->code_kamar ?>"><i class="fa fa-edit"></i> </a>
+															<a class="btn btn-primary btn-sm text-white ml-1" href="<?= base_url('admin/admin/edit_kamar_iswah/');
+																													echo $key->code_kamar ?>"><i class="fa fa-edit"></i> </a>
+
 															<a class="btn btn-danger btn-sm text-white ml-1" href="<?= base_url('admin/crud_kamar/h_kamar/');
 																													echo $key->code_kamar . '/kamar_p' ?>"><i class="fa fa-trash"></i> </a>
 
@@ -140,69 +142,3 @@
 			</div>
 		</div>
 	</div>
-
-	<?php foreach ($kmr as $key) :  ?>
-		<!-- Modal edit -->
-		<div class="modal fade" id="modaled<?= $key->code_kamar ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg" role="document">
-				<div class="modal-content">
-					<div class="modal-header bg-success">
-						<h5 class="modal-title" id="exampleModalLabel">Form Data Kamar</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-
-						<form name="f1z" method="post" action="<?= base_url('admin/crud_kamar/ed_kamar'); ?>">
-							<?php $u = $this->uri->segment(3) ?>
-							<div class="row">
-								<input type="hidden" name="urie" value="<?= $u ?>">
-								<input type="hidden" name="ge" value="P">
-								<input type="hidden" name="uide" value="<?= $key->code_kamar ?>">
-								<div class="col">
-									<label for="foto">Wali Kamar</label>
-									<a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR" onClick='javascript:window.open("ekamarwanita","Ratting",
-						"width=750,height=570,toolbar=1,status=1,");'>
-										<input type="text" name="wke" id="wke" value="<?= $key->wali_kamar ?>" class="form-control" placeholder="Input Wali kamar" required>
-									</a>
-								</div>
-							</div>
-							<br>
-							<div class="row">
-
-								<div class="col">
-									<label for="foto">Rayon</label>
-									<select name="rayone" class="form-control" required>
-										<option value="<?= $key->rayon ?>">-Jangan di Rubah bila tak ingin di ganti-</option>
-										<option value="Asean">Asean</option>
-										<option value="Khodijah">Khodijah</option>
-										<option value="Aisyah">Aisyah</option>
-									</select>
-
-								</div>
-								<div class="col">
-									<label for="foto">No Kamar</label>
-									<select name="rke" class="form-control" required>
-										<option value="<?= $key->ruang_kamar ?>">-Jangan di Rubah bila tak ingin di ganti-</option>
-										<?php for ($i = 1; $i <= 15; $i++) { ?>
-											<option value="<?= $i ?>"><?= $i ?></option>
-										<?php } ?>
-									</select>
-
-								</div>
-
-							</div>
-							<br>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
-						<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-
-	<?php endforeach; ?>

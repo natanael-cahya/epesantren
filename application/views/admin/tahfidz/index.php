@@ -79,12 +79,12 @@
                                                     <div class="row">
                                                         <button type="button" class="btn btn-info btn-xs"
                                                             data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $l->code_tahfidz ?>"><i
+                                                            data-target="#modaldet<?= $l->nis_tahfidz ?>"><i
                                                                 class="fa fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-primary btn-xs ml-1"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $l->code_tahfidz ?>"><i
-                                                                class="fa fa-edit"></i></button>
+                                                        <a class="btn btn-primary btn-xs text-white ml-1"
+                                                            href="<?= base_url('admin/admin/edit_tahfidz/');
+                                                                                                                    echo $l->code_tahfidz . '/' . $this->uri->segment(4) ?>"><i
+                                                                class="fa fa-edit"></i></a>
                                                         <a href="<?= base_url('admin/tahfidz/delete/');
                                                                         echo $l->code_tahfidz  ?>"
                                                             class="btn btn-danger btn-xs text-white ml-1"><i
@@ -391,7 +391,73 @@
 
 
 
+    <!-- Modal Detail -->
+    <?php foreach ($pp as $l) { ?>
+    <div class="modal fade " id="modaldet<?= $l->nis_tahfidz ?>" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title" id="exampleModalLabel">Record Tahfizh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
+                    <div class='table-responsive'>
+                        <table id='basic-datatables' class='display table table-striped table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Santri</th>
+                                    <th>Status</th>
+                                    <th>Ayat</th>
+                                    <th>Surat</th>
+                                    <th>Juz</th>
+                                    <th>Pembimbing</th>
+                                    <th>Tanggal Input</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $n = 1;
+                                    foreach ($al as $z) {
+                                        if ($z->nis_tahfidz == $l->nis_tahfidz) {
+                                            echo "
+                                <tr>
+                                    <td> $n </td>
+                                    <td>$z->nama </td>
+                                    <td> $z->status_tahfidz </td>
+                                    <td>$z->ayat </td>
+                                    <td> $z->surat </td>
+                                    <td>$z->juz </td>
+                                    <td>$z->pembimbing </td>
+                                    <td>$z->tgl_input </td>
+
+                                </tr>
+                                ";
+                                        }
+                                        $n++;
+                                    }
+                                    ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                        Tutup </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php } ?>
 
     <script>
     <?php

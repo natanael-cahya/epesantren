@@ -44,6 +44,14 @@ class Crud_extra extends CI_Controller
         $this->m_extra->h_extra($where, 'detaile');
         echo "<script>alert('Data berhasil disimpan');location='../../admin/extra_s'</script>";
     }
+
+    // function editextra()
+    // {
+    //     $where = ['code_extra' => $this->uri->segment(4)];
+    //     $data['user'] = $this->m_extra->edit_data($where, 'tb_extra')->result();
+    //     $this->load->view('editguru', $data);
+    // }
+
     function ed_extra()
     {
 
@@ -93,7 +101,7 @@ class Crud_extra extends CI_Controller
     {
         $nis = $this->input->post('nise');
         $exe = $this->input->post('exe');
-        $uri = $this->input->post('uri');
+        $uri = $this->input->post('urii');
 
         $z = $this->db->query("SELECT * FROM detaile WHERE code_extra='$exe' AND nis ='$nis'")->row_array();
 

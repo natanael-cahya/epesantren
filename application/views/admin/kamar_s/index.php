@@ -45,7 +45,7 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;Filter : &nbsp;<select id="fil">
                                     <option value="">Semua Data</option>
                                     <?php foreach ($kmrr as $q) { ?>
-                                    <option><?= $q->rayon ?></option>
+                                    <option><?= $q->rayon . ' ' . $q->ruang_kamar ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -65,7 +65,7 @@
                                         </thead>
                                         <tbody>
                                             <?php $p = 1;
-											foreach ($kmr as $key) : ?>
+                                            foreach ($kmr as $key) : ?>
 
                                             <tr>
                                                 <td><?= $p++; ?></td>
@@ -77,9 +77,10 @@
                                                 <td>
                                                     <div class="row">
 
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $key->nis ?>">Edit</button>
+                                                        <a class="btn btn-primary btn-xs text-white ml-1"
+                                                            href="<?= base_url('admin/admin/edit_kamar_ismah_umum/');
+                                                                                                                    echo $key->nis . '/' . $this->uri->segment(4) ?>"><i
+                                                                class="fa fa-edit"></i></a>
 
 
                                                     </div>
@@ -93,134 +94,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal Edit -->
-    <?php foreach ($kmr as $key) { ?>
-    <div class="modal fade" id="modalsantriz<?= $key->nis ?>" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Kamar Santri/Wati</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form name="f1" method="post" enctype="multipart/form-data"
-                        action="<?= base_url('admin/crud_kamar/ed_kmr'); ?>">
-                        <div class="row">
-                            <div class="col">
-                                <label for="nis">NIS</label>
-                                <a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ekamar","Ratting",
-						"width=950,height=570,toolbar=1,status=1,");'>
-                                    <input type="text" name="nise" onchange="ambilnise(this.value)"
-                                        value="<?= $key->nis ?>" class="form-control" id="nisee" placeholder="NIS">
-                                </a>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="nama">Nama</label>
-                                <input type="text" name="" class="form-control" value="<?= $key->nama ?>" id="nama"
-                                    placeholder="Nama">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-
-                            <div class="col">
-                                <label for="foto">Kamar</label>
-                                <select name="kmare" class="form-control">
-                                    <option value="<?= $key->code_kamar ?>">-Jangan di ubah jika tak ingin diganti-
-                                    </option>
-                                    <?php foreach ($kmr as $a) { ?>
-                                    <option value="<?= $a->code_kamar ?>"><?= $a->rayon ?> <?= $a->ruang_kamar ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="hidden" value="<?= $this->uri->segment(3) ?>" name="urii">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
-                        Tutup </button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php } ?>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalkamar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Data Kamar</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form name="f1z" method="post" action="<?= base_url('admin/crud_kamar/tb_kamar'); ?>">
-                        <?php $u = $this->uri->segment(3) ?>
-                        <div class="row">
-                            <input type="hidden" name="uri" value="<?= $u ?>">
-                            <input type="hidden" name="g" value="L">
-                            <div class="col">
-                                <label for="foto">Wali Kamar</label>
-                                <input type="text" name="wk" class="form-control" placeholder="Input Wali kamar">
-
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-
-                            <div class="col">
-                                <label for="foto">Rayon</label>
-                                <select name="rayon" class="form-control">
-                                    <option value="AT-Ikhlas">AL-Ikhlas</option>
-                                    <option value="AT-Taubah">AT-Taubah</option>
-                                    <option value="AL-Kautsar Selatan">AL-Kautsar Selatan</option>
-                                    <option value="AL-Kautsar Utara">AL-Kautsar Utara</option>
-                                    <option value="AN-Nur">AN-Nur</option>
-                                    <option value="AN-Nissa'">AN-Nissa'</option>
-                                </select>
-
-                            </div>
-                            <div class="col">
-                                <label for="foto">No Kamar</label>
-                                <select name="rk" class="form-control">
-                                    <?php for ($i = 1; $i <= 15; $i++) { ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
-                                    <?php } ?>
-                                </select>
-
-                            </div>
-
-                        </div>
-                        <br>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
-                        Tutup </button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
-                    </form>
                 </div>
             </div>
         </div>
