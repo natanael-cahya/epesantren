@@ -70,14 +70,13 @@ class Crud_ortu extends CI_Controller
 		$ttl_a = $this->input->post('ttl_a');
 		$ttl_i = $this->input->post('ttl_i');
 		$pendidikan_a = $this->input->post('pendidikan_ae');
-		$pendidikan_i = $this->input->post('pendikikan_ie');
+		$pendidikan_i = $this->input->post('pendidikan_ie');
 		$pekerjaan_a = $this->input->post('perkerjaan_ae');
 		$pekerjaan_i = $this->input->post('perkerjaan_ie');
 		$penghasilan_a = $this->input->post('penghasilan_ae');
 		$penghasilan_i = $this->input->post('penghasilan_ie');
 		$no_a = $this->input->post('no_ae');
 		$no_i = $this->input->post('no_ie');
-		$nis = $this->input->post('nise');
 		$idd = $this->input->post('idd');
 
 		$data = array(
@@ -97,8 +96,9 @@ class Crud_ortu extends CI_Controller
 			'pekerjaan_ibu' => $pekerjaan_i,
 			'penghasilan_ibu' => $penghasilan_i,
 			'no_hp_ibu' => $no_i,
-			'nis'	=> $nis,
+
 		);
+
 		$where = ['id_ortu' => $idd];
 		$this->m_ortu->ed_ortu($where, $data, 'tb_ortu');
 		echo "<script>alert('Data berhasil disimpan');location='../../admin/admin/ortu'</script>";

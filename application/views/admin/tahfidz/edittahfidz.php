@@ -36,91 +36,103 @@
 
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
+                                <div class="container">
                                     <?php foreach ($pp as $l) : ?>
 
-                                        <form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/tahfidz/edit'); ?>">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="nis">NIS</label>
-                                                    <a href="#nis" data-toggle="modal" data-target="#nis">
-                                                        <input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $l->nis ?>" class="form-control" id="nisee" placeholder="NIS">
-                                                    </a>
-
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="nama">Nama</label>
-                                                    <input type="text" name="" class="form-control" value="<?= $l->nama ?>" readonly id="nama" placeholder="Nama">
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="foto">Pembimbing</label>
-                                                    <a href="#ket" data-toggle="modal" data-target="#ket">
-                                                        <input type="text" class="form-control" name="pmbe" id="wk" placeholder="Nama Pembimbing" value="<?= $l->pembimbing ?>" required>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-
-                                                <div class="col">
-                                                    <label for="foto">Status</label>
-                                                    <select class="form-control" name="state">
-                                                        <option>- Pilih Status -</option>
-                                                        <option <?= $l->status_tahfidz == 'TAHSIN' ? 'selected' : '' ?>>TAHSIN</option>
-                                                        <option <?= $l->status_tahfidz == 'I`DAD' ? 'selected' : '' ?>>I`DAD</option>
-                                                        <option <?= $l->status_tahfidz == 'TAHFIZH' ? 'selected' : '' ?>>TAHFIZH
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="alamat">Ayat mulai - ayat</label>
-                                                    <input type="text" name="ayate" value="<?= $l->ayat ?>" class="form-control" id="alamat" placeholder="Alamat">
-                                                    *Note : Format angka-angka(tanpa Spasi) [ex:22-25]
-                                                </div>
+                                    <form name="f1" method="post" enctype="multipart/form-data"
+                                        action="<?= base_url('admin/tahfidz/edit'); ?>">
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nis">NIS</label>
+                                                <a href="#nis" data-toggle="modal" data-target="#nis">
+                                                    <input type="text" name="nise" onchange="ambilnise(this.value)"
+                                                        value="<?= $l->nis ?>" class="form-control" id="nisee"
+                                                        placeholder="NIS">
+                                                </a>
 
                                             </div>
-                                            <br>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="alamat">Surat</label>
-                                                    <input type="text" name="surate" value="<?= $l->surat ?>" class="form-control" id="alamat" placeholder="Alamat">
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nama">Nama</label>
+                                                <input type="text" name="" class="form-control" value="<?= $l->nama ?>"
+                                                    readonly id="nama" placeholder="Nama">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="foto">Pembimbing</label>
+                                                <a href="#ket" data-toggle="modal" data-target="#ket">
+                                                    <input type="text" class="form-control" name="pmbe" id="wk"
+                                                        placeholder="Nama Pembimbing" value="<?= $l->pembimbing ?>"
+                                                        required>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
 
-                                                </div>
-                                                <div class="col">
-                                                    <label for="alamat">Juz</label>
-                                                    <!-- <input type="text" name="juze" value="<?= $l->juz ?>" class="form-control" id="alamat"
+                                            <div class="col">
+                                                <label for="foto">Status</label>
+                                                <select class="form-control" name="state">
+                                                    <option>- Pilih Status -</option>
+                                                    <option <?= $l->status_tahfidz == 'TAHSIN' ? 'selected' : '' ?>>
+                                                        TAHSIN</option>
+                                                    <option <?= $l->status_tahfidz == 'I`DAD' ? 'selected' : '' ?>>I`DAD
+                                                    </option>
+                                                    <option <?= $l->status_tahfidz == 'TAHFIZH' ? 'selected' : '' ?>>
+                                                        TAHFIZH
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="alamat">Ayat mulai - ayat</label>
+                                                <input type="text" name="ayate" value="<?= $l->ayat ?>"
+                                                    class="form-control" id="alamat" placeholder="Alamat">
+                                                *Note : Format angka-angka(tanpa Spasi) [ex:22-25]
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="alamat">Surat</label>
+                                                <input type="text" name="surate" value="<?= $l->surat ?>"
+                                                    class="form-control" id="alamat" placeholder="Alamat">
+
+                                            </div>
+                                            <div class="col">
+                                                <label for="alamat">Juz</label>
+                                                <!-- <input type="text" name="juze" value="<?= $l->juz ?>" class="form-control" id="alamat"
                                     placeholder="Alamat"> -->
-                                                    <select name="juze" class="form-control">
-                                                        <?php for ($i = 1; $i <= 30; $i++) { ?>
-                                                            <option <?= $l->juz == $i ? 'selected' : '' ?>><?= $i ?></option>
-                                                        <?php } ?>
-                                                    </select>
+                                                <select name="juze" class="form-control">
+                                                    <?php for ($i = 1; $i <= 30; $i++) { ?>
+                                                    <option <?= $l->juz == $i ? 'selected' : '' ?>><?= $i ?></option>
+                                                    <?php } ?>
+                                                </select>
 
-                                                    <input type="hidden" name="idx" value="<?= $l->code_tahfidz ?>">
-                                                </div>
+                                                <input type="hidden" name="idx" value="<?= $l->code_tahfidz ?>">
                                             </div>
-                                            <br>
+                                        </div>
+                                        <br>
 
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                            class="fa fa-times"></i>
                                         Tutup </button>
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan
                                         Data</button>
                                     </form>
 
 
-                                <?php endforeach; ?>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -154,14 +166,15 @@
 
                             <tbody>
                                 <?php foreach ($esantri as $row) { ?>
-                                    <tr>
-                                        <td><?= $row->nis ?></td>
-                                        <td><?= $row->nama ?></td>
-                                        <td><?= $row->nama_ayah ?></td>
-                                        <td><?= $row->nama_ibu ?></td>
+                                <tr>
+                                    <td><?= $row->nis ?></td>
+                                    <td><?= $row->nama ?></td>
+                                    <td><?= $row->nama_ayah ?></td>
+                                    <td><?= $row->nama_ibu ?></td>
 
-                                        <td><a href='#' onclick="etangkapq('<?= $row->nis ?>');"><button class="btn btn-primary">PILIH</button></a></td>
-                                    </tr>
+                                    <td><a href='#' onclick="etangkapq('<?= $row->nis ?>');"><button
+                                                class="btn btn-primary">PILIH</button></a></td>
+                                </tr>
                                 <?php } ?>
 
                             </tbody>
@@ -169,7 +182,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                        Tutup </button>
 
                 </div>
             </div>
@@ -177,7 +191,7 @@
     </div>
 
     <script>
-        <?php
+    <?php
 
         $array2 = "var dataa = new Array();\n";
         foreach ($esantri as $rows) {
@@ -186,15 +200,15 @@
         }
 
         ?>
-        <?php echo $array2; ?>
+    <?php echo $array2; ?>
 
 
-        function etangkapq(o) {
+    function etangkapq(o) {
 
-            document.getElementById('nama').value = dataa[o].nama;
-            document.getElementById('nisee').value = o;
-            $('#nis').modal('hide');
-        }
+        document.getElementById('nama').value = dataa[o].nama;
+        document.getElementById('nisee').value = o;
+        $('#nis').modal('hide');
+    }
     </script>
 
 
@@ -225,12 +239,13 @@
 
                             <tbody>
                                 <?php foreach ($tguru as $row) { ?>
-                                    <tr>
-                                        <td><?= $row->code_pengajar ?></td>
-                                        <td><?= $row->nama_pengajar ?></td>
+                                <tr>
+                                    <td><?= $row->code_pengajar ?></td>
+                                    <td><?= $row->nama_pengajar ?></td>
 
-                                        <td><a href='#' onclick="etangkappp('<?= $row->nama_pengajar ?>');"><button class="btn btn-primary">PILIH</button></a></td>
-                                    </tr>
+                                    <td><a href='#' onclick="etangkappp('<?= $row->nama_pengajar ?>');"><button
+                                                class="btn btn-primary">PILIH</button></a></td>
+                                </tr>
                                 <?php } ?>
 
                             </tbody>
@@ -238,7 +253,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Tutup </button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                        Tutup </button>
 
                 </div>
             </div>
@@ -246,7 +262,7 @@
     </div>
 
     <script>
-        <?php
+    <?php
 
         $array = "var data = new Array();\n";
         foreach ($tguru as $row) {
@@ -255,12 +271,12 @@
         }
 
         ?>
-        <?php echo $array; ?>
+    <?php echo $array; ?>
 
 
-        function etangkappp(s) {
+    function etangkappp(s) {
 
-            document.getElementById('wk').value = s;
-            $('#ket').modal('hide');
-        }
+        document.getElementById('wk').value = s;
+        $('#ket').modal('hide');
+    }
     </script>

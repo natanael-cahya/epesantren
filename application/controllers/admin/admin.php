@@ -919,7 +919,9 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_tahfidz
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
-		$data['pp'] = $this->m_tahfidz->get_tahfidz();
+
+		$this->db->where('tahfidz.code_tahfidz=', $this->uri->segment(4));
+		$data['pp'] = $this->m_tahfidz->get_Atahfidz();
 
 		$this->load->view('template/header', $data);
 		$this->load->view('template/sidebar', $data);
@@ -990,6 +992,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1013,6 +1017,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1036,6 +1042,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1059,6 +1067,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1082,6 +1092,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1105,6 +1117,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
@@ -1129,6 +1143,8 @@ class Admin extends CI_Controller
 
 		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
 		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
 		$this->load->view('template/header', $data);
