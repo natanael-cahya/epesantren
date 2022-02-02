@@ -1,5 +1,5 @@
 <?php if ($admin['level'] != 3) {
-	redirect('login');
+    redirect('login');
 } ?>
 <!-- Sidebar -->
 <div class="sidebar sidebar-style-2">
@@ -14,14 +14,14 @@
                         <span>
                             <?= $admin['nama'] ?>
                             <span class="user-level"><?php if ($admin['level'] == 1) {
-															echo "Administrator";
-														} else if ($admin['level'] == 2) {
-															echo "Staff Pengasuhan";
-														} else if ($admin['level'] ==  3) {
-															echo "Staff Pengajaran";
-														} else {
-															echo "Organtri";
-														} ?></span>
+                                                            echo "Administrator";
+                                                        } else if ($admin['level'] == 2) {
+                                                            echo "Staff Pengasuhan";
+                                                        } else if ($admin['level'] ==  3) {
+                                                            echo "Staff Pengajaran";
+                                                        } else {
+                                                            echo "Organtri";
+                                                        } ?></span>
                             <span class="caret"></span>
                         </span>
                     </a>
@@ -46,10 +46,10 @@
             </div>
             <ul class="nav nav-success">
                 <li <?php if ($this->uri->segment(2) == "pengajar") {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
                     <a href="<?= base_url('pengajar/pengajar/'); ?>">
                         <i class="fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
@@ -67,15 +67,15 @@
 
 
                 <li <?php if ($this->uri->segment(3) == 'kelas' || $this->uri->segment(3) == 'kelas_p') {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
                     <a href="<?php if ($admin['gender'] == 'L') {
-									echo base_url('pengajar/pengajar/kelas');
-								} else {
-									echo base_url('pengajar/pengajar/kelas_p');
-								} ?>">
+                                    echo base_url('pengajar/pengajar/kelas');
+                                } else {
+                                    echo base_url('pengajar/pengajar/kelas_p');
+                                } ?>">
                         <i class="fas fa-school"></i>
                         <p>Data Kelas</p>
                     </a>
@@ -92,10 +92,10 @@
                 </li>
                 <!-- DROPDOWN MENU -->
                 <li <?php if ($this->uri->segment(3) == "santri_k") {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
                     <a href="<?= base_url('pengajar/pengajar/santri_k'); ?>">
                         <i class="fas fa-graduation-cap"></i>
                         <p>Kenaikan Kelas Santri</p>
@@ -103,41 +103,39 @@
                     </a>
                 </li>
                 <li <?php if ($this->uri->segment(3) == 'perizinan') {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
                     <a href="<?= base_url('pengajar/perizinan'); ?>">
                         <i class="fas fa-address-book"></i>
                         <p>Perizinan Santri</p>
 
                     </a>
                 </li>
+
                 <li <?php if ($this->uri->segment(3) == 'kelas_s' || $this->uri->segment(3) == 'kelas_ps') {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
-                    <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
+                    <a href="<?php if ($admin['gender'] == 'L') {
+                                    echo base_url('pengajar/pengajar/kelas_s');
+                                } else {
+                                    echo base_url('pengajar/pengajar/kelas_ps');
+                                } ?>">
                         <i class="fas fa-school"></i><i class="fas fa-users"></i>
                         <p>Data Santri - Kelas</p>
                     </a>
-                    <div class="dropdown-menu">
-                        <a href="<?= base_url('pengajar/pengajar/kelas_s'); ?>" class="nav-item"><i
-                                class="fa fa-male"></i>Data Kelas ISMAH</a>
-                        <a href="<?= base_url('pengajar/pengajar/kelas_ps'); ?>" class="nav-item"><i
-                                class="fa fa-female"></i>Data Kelas ISWAH</a>
 
-
-                    </div>
                 </li>
 
 
                 <li <?php if ($this->uri->segment(3) == 'pm') {
-						echo 'class= "nav-item active"';
-					} else {
-						echo 'class= "nav-item "';
-					} ?>>
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
                     <a href="<?= base_url('pengajar/pengajar/pm'); ?>">
                         <i class="fas fa-gavel"></i>
                         <p>Pelanggaran KMI</p>
@@ -175,10 +173,10 @@
                 </div>
                 <div class="form-group">
                     <h3>Anda Login sebagai : <?php if ($admin['level'] == 1) {
-													echo "<b>Administrator</b>";
-												} else if ($admin['level'] == 2) {
-													echo "TU";
-												} ?></h3>
+                                                    echo "<b>Administrator</b>";
+                                                } else if ($admin['level'] == 2) {
+                                                    echo "TU";
+                                                } ?></h3>
                 </div>
                 <div class="form-group">
                     <h3>Nama : <?= $admin['nama'] ?></h3>
