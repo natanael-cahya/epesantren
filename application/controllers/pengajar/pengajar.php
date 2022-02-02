@@ -19,6 +19,7 @@ class Pengajar extends CI_Controller
 		$this->load->model('m_konsulat');
 		$this->load->model('m_kelas');
 		$this->load->model('m_guru');
+		$this->load->model('m_group');
 	}
 
 	function index()
@@ -187,6 +188,26 @@ class Pengajar extends CI_Controller
 		$this->load->view('template/header', $data);
 		$this->load->view('template/sidebar_s2', $data);
 		$this->load->view('pengajar/kelas_s/index2');
+		$this->load->view('template/footer', $data);
+	}
+
+
+	function edit_kelas_ismah()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kelas Ismah";
+		$where = ['code_kelas' => $this->uri->segment(4)];
+		$data['kls'] = $this->m_kelas->edit_data($where, 'tb_kelas')->result();
+		$data['tguru'] = $this->m_guru->get_guru();
+
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['lembaga'] = $this->m_group->get_lembaga();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s2', $data);
+		$this->load->view('pengajar/kelas/editkelasismah', $data);
+
 		$this->load->view('template/footer', $data);
 	}
 }
