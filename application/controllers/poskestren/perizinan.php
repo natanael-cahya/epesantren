@@ -8,6 +8,10 @@ class Perizinan extends CI_Controller
     {
         parent::__construct();
         poskestren_check();
+        $tgl = date('Y-m-d H:i:s');
+        $this->db->query("UPDATE `perizinan` SET stat='1' where tgl_selesai < ?", $tgl);
+        $this->data = $this->db->query("SELECT code_perizinan,nis_perizinan,nis,nama,tgl_selesai FROM perizinan,tb_dsantri where perizinan.nis_perizinan = tb_dsantri.nis AND tgl_selesai < ?", $tgl)->result();
+
 
 
         $this->load->library('session');
@@ -26,6 +30,18 @@ class Perizinan extends CI_Controller
         $this->load->view('poskestren/perizinan/index', $data);
         $this->load->view('template/footer', $data);
     }
+    function verif()
+    {
+
+        $data = array(
+
+            'verif'        => 1
+        );
+
+        $where = array('code_perizinan'    => $this->uri->segment(4));
+        $this->M_perizinan->edit($where, $data, 'perizinan');
+        echo "<script>alert('data berhasil diubah');location='../../perizinan'</script>";
+    }
     function tb_data()
     {
         $nis = $this->input->post('nis');
@@ -41,6 +57,7 @@ class Perizinan extends CI_Controller
             'tgl_mulai'              => $tm,
             'tgl_selesai'       => $ts,
             'keterangan_izin'  => $ket,
+            'pencatat'              => 5,
             'verif'             => 1
 
         );
@@ -60,7 +77,8 @@ class Perizinan extends CI_Controller
             'nis_perizinan'            => $nise,
             'status_perizinan'        => $stats,
             'tgl_selesai'            => $tgl_selesai,
-            'keterangan_izin'        => $ket
+            'keterangan_izin'        => $ket,
+            'pencatat'  => 5
         );
 
         $where = array('code_perizinan'    => $kd);

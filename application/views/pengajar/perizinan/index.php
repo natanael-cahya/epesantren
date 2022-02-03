@@ -6,7 +6,7 @@
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
-                            <i class="fas fa-gavel"></i>
+                            <i class="fas fa-book"></i>
                         </a>
                     </li>
                     <li class="separator">
@@ -58,12 +58,14 @@
                                                 <th>tanggal izin</th>
                                                 <th>Tanggal Selesai</th>
                                                 <th>keterangan</th>
+                                                <th>Status</th>
+                                                <th>Pencatat</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $n = 1;
-											foreach ($pp as $l) : ?>
+                                            foreach ($pp as $l) : ?>
 
                                             <tr>
                                                 <td><?= $n++; ?></td>
@@ -72,14 +74,30 @@
                                                 <td><?= date("d-m-Y", strtotime($l->tgl_mulai)) ?> </td>
                                                 <td><?= date("d-m-Y H:i", strtotime($l->tgl_selesai)) ?></td>
                                                 <td><?= $l->keterangan_izin ?></td>
-
+                                                <td><?= $l->verif == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-question'></i>" ?>
+                                                <td>
+                                                    <?php
+                                                        if ($l->pencatat ==  1) {
+                                                            echo "Admin";
+                                                        } else if ($l->pencatat ==  2) {
+                                                            echo "Pengasuhan";
+                                                        } else if ($l->pencatat ==  3) {
+                                                            echo "Pengajaran";
+                                                        } else if ($l->pencatat ==  4) {
+                                                            echo "Organtri";
+                                                        } else if ($l->pencatat ==  5) {
+                                                            echo "Poskestren";
+                                                        } 
+                                                        ?>
+                                                </td>
 
                                                 <td style="width:10%;">
                                                     <div class="row">
-                                                        <button type="button" class="btn btn-primary btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $l->code_perizinan ?>"><i
-                                                                class="fa fa-edit"></i></button>
+                                                        <a class="btn btn-primary btn-xs text-white ml-1"
+                                                            href="<?= base_url('pengajar/perizinan/edit_perizinan_ismah/');
+                                                                                                                    echo $l->code_perizinan . '/' . $this->uri->segment(4) ?>"><i
+                                                                class="fa fa-edit"></i></a>
+
 
                                                     </div>
 
@@ -350,13 +368,13 @@
     <script>
     <?php
 
-		$array = "var data = new Array();\n";
-		foreach ($tsantrikonsulat as $row) {
-			$m = $row->nama;
-			$array .= "data['" . $row->nama . "'] = {ns :'" . $row->nama . "',nis :'" . $row->nis  . "'};\n";
-		}
+        $array = "var data = new Array();\n";
+        foreach ($tsantrikonsulat as $row) {
+            $m = $row->nama;
+            $array .= "data['" . $row->nama . "'] = {ns :'" . $row->nama . "',nis :'" . $row->nis  . "'};\n";
+        }
 
-		echo $array; ?>
+        echo $array; ?>
 
     function ambilniskon(nama) {
 

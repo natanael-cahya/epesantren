@@ -40,8 +40,8 @@ class M_pelanggaran extends CI_Model
 		$this->db->delete($table);
 	}
 	function ed_pel($where, $data, $table)
-    {
-        $this->db->where($where);
-        $this->db->update($table, $data);
-    }
+	{
+		$this->db->where($where);
+		$this->db->update($table, $data);
+	}
 }

@@ -40,7 +40,8 @@ class Perizinan extends CI_Controller
 			'status_perizinan' => $stat,
 			'tgl_mulai'	   	   => $tm,
 			'tgl_selesai'	   => $ts,
-			'keterangan_izin'  => $ket
+			'keterangan_izin'  => $ket,
+			'pencatat'	=> 2
 
 		);
 
@@ -59,7 +60,8 @@ class Perizinan extends CI_Controller
 			'nis_perizinan'			=> $nise,
 			'status_perizinan'		=> $stats,
 			'tgl_selesai'			=> $tgl_selesai,
-			'keterangan_izin'		=> $ket
+			'keterangan_izin'		=> $ket,
+			'pencatat'	=> 2
 		);
 
 		$where = array('code_perizinan'	=> $kd);
@@ -73,5 +75,27 @@ class Perizinan extends CI_Controller
 		$where = ['code_perizinan' => $this->uri->segment(4)];
 		$this->M_perizinan->delete($where, 'perizinan');
 		echo "<script>alert('Data berhasil dihapus');location='../../perizinan'</script>";
+	}
+
+	function edit_perizinan()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kelas Ismah";
+		// $where = ['code_perizinan' => $this->uri->segment(4)];
+
+		// $where = ['code_perizinan' => $this->uri->segment(4)];
+		// $data['pp'] = $this->m_perizinan->edit_data($where, 'tb_kelas')->result();
+		// $data['tguru'] = $this->m_guru->get_guru();
+		$this->db->where('perizinan.code_perizinan=', $this->uri->segment(4));
+		$data['perizinan_ismah'] = $this->M_perizinan->get_perizinan();
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		// $data['lembaga'] = $this->m_group->get_lembaga();
+
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s1', $data);
+		$this->load->view('pengasuh/perizinan/editperizinanismah', $data);
+
+		$this->load->view('template/footer', $data);
 	}
 }

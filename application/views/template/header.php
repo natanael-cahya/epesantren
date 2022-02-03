@@ -67,8 +67,8 @@
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="white">
                 <?php $a1 = $this->uri->segment(1);
-                $a2 = $this->uri->segment(1); ?>
-                <a href="<?= base_url($a1 . '/' . $a2 . '/'); ?>" class="logo">
+                $a2 = $this->uri->segment(2); ?>
+                <a href="<?= base_url($a1 . '/' . $a1); ?>" class="logo">
                     <img src="<?= base_url('assets'); ?>/img/log.png" alt="E-PESANTREN" class="navbar-brand">
                 </a>
                 <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
@@ -105,13 +105,13 @@
                                 <i class="fa fa-search"></i>
                             </a>
                         </li> -->
-
+                        <?php if ($admin['level'] == 1 || $admin['level'] == 5) { ?>
                         <li class="nav-item dropdown hidden-caret">
                             <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell"></i>
                                 <span class="notification"><?php $a = $this->db->query("SELECT count(*) as hs FROM `perizinan` where stat = '1'")->result();
-                                                            echo $a[0]->hs ?></span>
+                                                                echo $a[0]->hs ?></span>
                             </a>
                             <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
                                 <li>
@@ -140,11 +140,14 @@
                                     <?php } ?>
                                 </li>
                                 <li>
-                                    <a class="see-all" href="<?= base_url('admin/perizinan') ?>">Lihat Semua
+                                    <a class="see-all"
+                                        href="<?= base_url($this->uri->segment(1) . '/perizinan') ?>">Lihat
+                                        Semua
                                         Notifikasi<i class="fa fa-angle-right"></i> </a>
                                 </li>
                             </ul>
                         </li>
+                        <?php } ?>
 
                         <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"

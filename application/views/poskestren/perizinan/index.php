@@ -6,7 +6,7 @@
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
-                            <i class="fas fa-gavel"></i>
+                            <i class="fas fa-book"></i>
                         </a>
                     </li>
                     <li class="separator">
@@ -50,6 +50,8 @@
                                                 <th>Tanggal Selesai</th>
                                                 <th>keterangan</th>
                                                 <th>Status</th>
+                                                <th>Pencatat</th>
+                                                <th>Verif</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -64,6 +66,28 @@
                                                 <td><?= date("d-m-Y H:i", strtotime($l->tgl_selesai)) ?></td>
                                                 <td><?= $l->keterangan_izin ?></td>
                                                 <td><?= $l->verif == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-question'></i>" ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if ($l->pencatat ==  1) {
+                                                            echo "Admin";
+                                                        } else if ($l->pencatat ==  2) {
+                                                            echo "Pengasuhan";
+                                                        } else if ($l->pencatat ==  3) {
+                                                            echo "Pengajaran";
+                                                        } else if ($l->pencatat ==  4) {
+                                                            echo "Organtri";
+                                                        } else if ($l->pencatat ==  5) {
+                                                            echo "Poskestren";
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($l->status_perizinan == 'Sakit' && $l->verif == 0) { ?>
+                                                    <a href="<?= base_url('poskestren/perizinan/verif/') . $l->code_perizinan ?>"
+                                                        class="btn btn-primary btn-xs"><i class="fa fa-check"></i> </a>
+                                                    <?php } ?>
+
                                                 </td>
 
                                             </tr>

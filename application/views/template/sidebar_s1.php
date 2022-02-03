@@ -95,6 +95,22 @@
                     <h4 class="text-section">UMUM</h4>
                 </li>
 
+                <li <?php if ($this->uri->segment(3) == 'kamar_s' || $this->uri->segment(3) == 'kamar_ps') {
+                        echo 'class= "nav-item active"';
+                    } else {
+                        echo 'class= "nav-item "';
+                    } ?>>
+                    <a href="<?php if ($admin['gender'] == 'L') {
+                                    echo base_url('pengasuhan/pengasuhan/kamar_s');
+                                } else {
+                                    echo base_url('pengasuhan/pengasuhan/kamar_ps');
+                                } ?>">
+                        <i class="fas fa-building"></i><i class="fas fa-users"></i>
+                        <p>Data Kamar - Santri</p>
+                    </a>
+
+                </li>
+
                 <!-- DROPDOWN MENU -->
 
                 <li <?php if ($this->uri->segment(3) == 'extra_s' || $this->uri->segment(3) == 'extra_s2') {

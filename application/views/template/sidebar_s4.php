@@ -53,7 +53,7 @@
                     } else {
                         echo 'class= "nav-item "';
                     } ?>>
-                    <a href="<?= base_url('organtri/organtri/'); ?>">
+                    <a href="<?= base_url('poskestren/poskestren/'); ?>">
                         <i class="fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
 

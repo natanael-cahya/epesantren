@@ -1046,6 +1046,7 @@ class Admin extends CI_Controller
 		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
 		$data['pp'] = $this->m_pelanggaran->get_App();
 
+
 		$this->load->view('template/header', $data);
 		$this->load->view('template/sidebar', $data);
 		$data['esantri'] = $this->m_dsantri->get_Asantri();

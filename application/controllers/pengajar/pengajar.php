@@ -20,6 +20,7 @@ class Pengajar extends CI_Controller
 		$this->load->model('m_kelas');
 		$this->load->model('m_guru');
 		$this->load->model('m_group');
+		$this->load->model('M_perizinan');
 	}
 
 	function index()
@@ -210,4 +211,81 @@ class Pengajar extends CI_Controller
 
 		$this->load->view('template/footer', $data);
 	}
+	function edit_kelas_ismah_umum()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Kelas (Umum)";
+		$par = $this->uri->segment(4);
+		$ur = $this->uri->segment(5);
+		if ($ur == 'L') {
+			$this->db->where('tb_dsantri.nis=', $par);
+			$this->db->where('tb_kelas.gender=', 'L');
+			$data['kls'] = $this->m_kelas->get_Akelas();
+
+			$this->db->group_by('tb_kelas.nama_kelas');
+			$this->db->where('tb_kelas.gender=', 'L');
+			$data['klz'] = $this->m_kelas->get_Akelas();
+			$data['klas'] = $this->m_kelas->get_kelas();
+			$data['esantri'] = $this->m_dsantri->get_Asantri();
+		} else {
+			$this->db->where('tb_dsantri.nis=', $par);
+			$this->db->where('tb_kelas.gender=', 'P');
+			$data['kls'] = $this->m_kelas->get_Akelas();
+
+			$this->db->group_by('tb_kelas.nama_kelas');
+			$this->db->where('tb_kelas.gender=', 'P');
+			$data['klz'] = $this->m_kelas->get_Akelas();
+			$data['klas'] = $this->m_kelas->get_kelas();
+			$data['esantri'] = $this->m_dsantri->get_Asantri();
+		}
+
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s2', $data);
+		$this->load->view('pengajar/kelas_s/editkelasismahumum', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	function edit_pm()
+	{
+		$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+		$data['judul'] = "Edit Data Pelanggaran KMI";
+		// $where = ['id_detaile' => $this->uri->segment(4)];
+		// $data['Aextra'] = $this->m_extra->edit_data($where, 'detaile')->result();
+
+
+		//DISINI MAS YANG MUNCUL SELECT * HARUSNYA FILTER BERDASARKAN code_pelanggaran
+
+
+		$this->db->where('code_pelanggaran=', $this->uri->segment(4));
+		$data['pp'] = $this->m_pelanggaran->get_App();
+
+
+		$data['esantri'] = $this->m_dsantri->get_Asantri();
+		$data['tguru'] = $this->m_guru->get_guru();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar_s2', $data);
+		$this->load->view('pengajar/pm/editpm', $data);
+
+		$this->load->view('template/footer', $data);
+	}
+
+	// function edit_perizinan_ismah()
+	// {
+	// 	$data['admin'] = $this->db->get_where('auth', ['nama' => $this->session->userdata('nama')])->row_array();
+	// 	$data['judul'] = "Edit Data Kelas Ismah";
+	// 	$where = ['code_perizinan' => $this->uri->segment(4)];
+	// 	$data['pp'] = $this->m_perizinan->edit_data($where, 'tb_kelas')->result();
+	// 	$data['tguru'] = $this->m_guru->get_guru();
+
+	// 	$data['esantri'] = $this->m_dsantri->get_Asantri();
+	// 	$data['lembaga'] = $this->m_group->get_lembaga();
+
+
+	// 	$this->load->view('template/header', $data);
+	// 	$this->load->view('template/sidebar_s2', $data);
+	// 	$this->load->view('pengajar/perizinan/editperizinanismah', $data);
+
+	// 	$this->load->view('template/footer', $data);
+	// }
 }

@@ -37,7 +37,9 @@ class Login extends CI_Controller
 
 		$auth = $this->db->get_where('auth', ['username' => $username])->row_array();
 
-
+		if (empty($auth)) {
+			echo "<script>alert('username atau password Tidak ditemukan!');location='login'</script>";
+		}
 		if (password_verify($password, $auth['password']) && $auth) {
 
 			if ($auth['level'] == 1) {

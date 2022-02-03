@@ -28,31 +28,26 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="d-flex align-items-center">
-                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalpp">
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalpp">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
                                 </button>
                             </div>
                             <br>
                             <div class="d-flex align-items-center">
-                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel'); ?>"
-                                    class="btn btn-warning btn-xs m">
+                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel'); ?>" class="btn btn-warning btn-xs m">
                                     <i class="fa fa-print"></i>
                                     Print All Data
                                 </a>&nbsp;
-                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel'); ?>"
-                                    class="btn btn-info btn-xs ">
+                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel'); ?>" class="btn btn-info btn-xs ">
                                     <i class="fa fa-download"></i>
                                     Download All Data
                                 </a>&nbsp;
-                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel/keamanan'); ?>"
-                                    class="btn btn-warning btn-xs ml-auto">
+                                <a target="_blank" href="<?= base_url('admin/laporan/l_pel/keamanan'); ?>" class="btn btn-warning btn-xs ml-auto">
                                     <i class="fa fa-print"></i>
                                     Print Data
                                 </a>&nbsp;
-                                <a target="_blank" href="<?= base_url('admin/laporan/export_Apel/keamanan'); ?>"
-                                    class="btn btn-info btn-xs ">
+                                <a target="_blank" href="<?= base_url('admin/laporan/export_Apel/keamanan'); ?>" class="btn btn-info btn-xs ">
                                     <i class="fa fa-download"></i>
                                     Download Data
                                 </a>
@@ -76,29 +71,25 @@
                                             <?php $n = 1;
                                             foreach ($pp as $l) : ?>
 
-                                            <tr>
-                                                <td><?= $n++; ?></td>
-                                                <td><?= $l->nama ?></td>
-                                                <td><?= $l->pelanggaran ?></td>
-                                                <td><?php echo date("d-m-Y", strtotime($l->tgl)); ?></td>
-                                                <td> <?= $l->waktu ?></td>
-                                                <td><?= $l->sanksi ?></td>
-                                                <td><?= $l->tingkat ?></td>
-                                                <td>
-                                                    <div class="row">
-                                                        <button type="button" class="btn btn-primary btn-sm"
-                                                            data-toggle="modal"
-                                                            data-target="#modalsantriz<?= $l->nis ?>"><i
-                                                                class="fa fa-edit"></i> </button>
-                                                        <a href="<?= base_url('admin/crud_pelanggaran/h_pel/');
-                                                                        echo $l->code_pelanggaran . "/km" ?>"
-                                                            class="btn btn-danger btn-sm text-white ml-1"><i
-                                                                class="fa fa-trash"></i></a>
+                                                <tr>
+                                                    <td><?= $n++; ?></td>
+                                                    <td><?= $l->nama ?></td>
+                                                    <td><?= $l->pelanggaran ?></td>
+                                                    <td><?php echo date("d-m-Y", strtotime($l->tgl)); ?></td>
+                                                    <td> <?= $l->waktu ?></td>
+                                                    <td><?= $l->sanksi ?></td>
+                                                    <td><?= $l->tingkat ?></td>
+                                                    <td>
+                                                        <div class="row">
+                                                            <a class="btn btn-primary btn-xs text-white ml-1" href="<?= base_url('pengasuhan/pengasuhan/edit_km/');
+                                                                                                                    echo $l->code_pelanggaran . '/' . $this->uri->segment(4) ?>"><i class="fa fa-edit"></i></a>
+                                                            <a href="<?= base_url('admin/crud_pelanggaran/h_pel/');
+                                                                        echo $l->code_pelanggaran . "/km" ?>" class="btn btn-danger btn-sm text-white ml-1"><i class="fa fa-trash"></i></a>
 
-                                                    </div>
+                                                        </div>
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
                                             <?php endforeach; ?>
                                         </tbody>
@@ -115,89 +106,83 @@
 
     <!-- Modal Edit -->
     <?php foreach ($pp as $k) { ?>
-    <div class="modal fade" id="modalsantriz<?= $k->nis ?>" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Santri/Wati</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <? php // foreach ($pp as $k) { 
+        <div class="modal fade" id="modalsantriz<?= $k->nis ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title" id="exampleModalLabel">Edit Data Santri/Wati</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <? php // foreach ($pp as $k) { 
                         ?>
-                    <form name="f1" method="post" enctype="multipart/form-data"
-                        action="<?= base_url('pengasuhan/crud_pelanggaran/ed_pel'); ?>">
-                        <div class="row">
-                            <div class="col">
-                                <label for="nis">NIS</label>
-                                <a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ep","Ratting",
+                        <form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('pengasuhan/crud_pelanggaran/ed_pel'); ?>">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nis">NIS</label>
+                                    <a href="javascript:void(0);" NAME="NIS" title="Klik Untuk Cari NIS" onClick='javascript:window.open("ep","Ratting",
 						"width=950,height=570,toolbar=1,status=1,");'>
-                                    <input type="text" name="nise" onchange="ambilnise(this.value)"
-                                        value="<?= $k->nis ?>" class="form-control" id="nisee" placeholder="NIS">
-                                </a>
+                                        <input type="text" name="nise" onchange="ambilnise(this.value)" value="<?= $k->nis ?>" class="form-control" id="nisee" placeholder="NIS">
+                                    </a>
 
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <label for="nama">Nama</label>
-                                <input type="text" name="" class="form-control" value="<?= $k->nama ?>" readonly
-                                    id="nama" placeholder="Nama">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" name="" class="form-control" value="<?= $k->nama ?>" readonly id="nama" placeholder="Nama">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
+                            <br>
+                            <div class="row">
 
-                            <div class="col">
-                                <label for="foto">Pelanggaran</label>
-                                <input type="text" name="plg" class="form-control" value="<?= $k->pelanggaran ?>">
+                                <div class="col">
+                                    <label for="foto">Pelanggaran</label>
+                                    <input type="text" name="plg" class="form-control" value="<?= $k->pelanggaran ?>">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <label for="alamat">Sanksi</label>
-                                <input type="text" name="sanks" value="<?= $k->sanksi ?>" class="form-control"
-                                    id="alamat" placeholder="Alamat">
-                                <input type="hidden" name="uri" value="<?= $this->uri->segment(3) ?>">
-                                <input type="hidden" name="idx" value="<?= $k->code_pelanggaran ?>">
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="alamat">Sanksi</label>
+                                    <input type="text" name="sanks" value="<?= $k->sanksi ?>" class="form-control" id="alamat" placeholder="Alamat">
+                                    <input type="hidden" name="uri" value="<?= $this->uri->segment(3) ?>">
+                                    <input type="hidden" name="idx" value="<?= $k->code_pelanggaran ?>">
+                                </div>
                             </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <label for="alamat">Tingkat Pelanggaran</label>
-                                <select class="form-control" name="tingkat">
-                                    <option <?= $k->tingkat == 'Ringan' ? 'selected' : '' ?>>Ringan</option>
-                                    <option <?= $k->tingkat == 'Sedang' ? 'selected' : '' ?>>Sedang</option>
-                                    <option <?= $k->tingkat == 'Berat' ? 'selected' : '' ?>>Berat</option>
-                                    <option <?= $k->tingkat == 'Sangat Berat' ? 'selected' : '' ?>>Sangat Berat</option>
-                                </select>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="alamat">Tingkat Pelanggaran</label>
+                                    <select class="form-control" name="tingkat">
+                                        <option <?= $k->tingkat == 'Ringan' ? 'selected' : '' ?>>Ringan</option>
+                                        <option <?= $k->tingkat == 'Sedang' ? 'selected' : '' ?>>Sedang</option>
+                                        <option <?= $k->tingkat == 'Berat' ? 'selected' : '' ?>>Berat</option>
+                                        <option <?= $k->tingkat == 'Sangat Berat' ? 'selected' : '' ?>>Sangat Berat</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
-                        Tutup </button>
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
-                    </form>
-                    <? php // } 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-times"></i>
+                            Tutup </button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan Data</button>
+                        </form>
+                        <? php // } 
                         ?>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php } ?>
 
 
     <!-- Modal -->
-    <div class="modal fade" id="modalpp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalpp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -214,11 +199,9 @@
                             <div class="col">
                                 <label for="foto">Nama Santri</label>
 
-                                <a href="javascript:void(0);" style="cursor: pointer;" NAME="SANTRI"
-                                    title="Klik Untuk Cari SANTRI" onClick='javascript:window.open("t_santri_konsulat","Ratting",
+                                <a href="javascript:void(0);" style="cursor: pointer;" NAME="SANTRI" title="Klik Untuk Cari SANTRI" onClick='javascript:window.open("t_santri_konsulat","Ratting",
 						"width=950,height=570,toolbar=1,status=1,");'>
-                                    <input type="text" name="ns" onchange="ambilniskon(this.value)" class="form-control"
-                                        id="ns" placeholder="Klik untuk pilih santri">
+                                    <input type="text" name="ns" onchange="ambilniskon(this.value)" class="form-control" id="ns" placeholder="Klik untuk pilih santri">
                                 </a>
                                 <input type="hidden" name="nis" id="nis" class="form-control">
                             </div>
@@ -227,8 +210,7 @@
                         <div class="row">
                             <div class="col">
                                 <label for="foto">Pelanggaran</label>
-                                <input type="text" name="pelanggaran" class="form-control" required
-                                    placeholder="Input pelanggaran yang dilakukan santri">
+                                <input type="text" name="pelanggaran" class="form-control" required placeholder="Input pelanggaran yang dilakukan santri">
 
                             </div>
 
@@ -267,23 +249,19 @@
                             </div>
                             <div class="col">
                                 <label for="foto">Tanggal</label>
-                                <input type="text" value="<?= date('Y-m-d') ?>" name="tgl" class="form-control"
-                                    readonly>
+                                <input type="text" value="<?= date('Y-m-d') ?>" name="tgl" class="form-control" readonly>
                             </div>
                             <div class="col">
                                 <label for="foto">Jam</label>
-                                <input type="text" value="<?= date('H:i:s') ?>" name="jam" class="form-control"
-                                    readonly>
+                                <input type="text" value="<?= date('H:i:s') ?>" name="jam" class="form-control" readonly>
                             </div>
                         </div><br>
                         <div class="row">
                             <div class="col">
                                 <label for="foto">Sanksi</label>
-                                <input type="text" name="sanksi" class="form-control" placeholder="Input Sanksi"
-                                    required>
+                                <input type="text" name="sanksi" class="form-control" placeholder="Input Sanksi" required>
                                 <input type="hidden" class="form-control" name="sort" value="keamanan">
-                                <input type="hidden" class="form-control" name="uri"
-                                    value="<?= $this->uri->segment(3); ?>">
+                                <input type="hidden" class="form-control" name="uri" value="<?= $this->uri->segment(3); ?>">
                             </div>
                         </div>
                         <br>
@@ -311,8 +289,7 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="modalpr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalpr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -350,7 +327,7 @@
         </div>
     </div>
     <script>
-    <?php
+        <?php
 
         $array = "var data = new Array();\n";
         foreach ($tsantrikonsulat as $row) {
@@ -360,11 +337,11 @@
 
         echo $array; ?>
 
-    function ambilniskon(nama) {
+        function ambilniskon(nama) {
 
 
-        document.getElementById('nis').value = data[nama].nis;
+            document.getElementById('nis').value = data[nama].nis;
 
 
-    };
+        };
     </script>

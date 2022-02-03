@@ -31,8 +31,7 @@
                             <h4 class="card-title">Data Kelas Ismah</h4>
 
                             <div class="d-flex align-items-center">
-                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal"
-                                    data-target="#modalkamar">
+                                <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalkamar">
                                     <i class="fa fa-plus"></i>
                                     Tambah Data
                                 </button>
@@ -55,26 +54,26 @@
                                         </thead>
                                         <tbody>
                                             <?php $p = 1;
-											foreach ($kls as $key) : ?>
+                                            foreach ($kls as $key) : ?>
 
-                                            <tr>
-                                                <td><?= $p++; ?></td>
-                                                <td><?= $key->lembagaa ?></td>
-                                                <td><?= $key->marhalah ?></td>
-                                                <td><?= $key->nama_kelas ?></td>
-                                                <td><?= $key->no_kls ?></td>
-                                                <td><?= $key->kelass ?></td>
-                                                <td><?= $key->wali_kelas ?></td>
-                                                <td><?= $key->asisten ?></td>
-                                                <td style="width:10%;">
-                                                    <div class="row">
+                                                <tr>
+                                                    <td><?= $p++; ?></td>
+                                                    <td><?= $key->lembagaa ?></td>
+                                                    <td><?= $key->marhalah ?></td>
+                                                    <td><?= $key->nama_kelas ?></td>
+                                                    <td><?= $key->no_kls ?></td>
+                                                    <td><?= $key->kelass ?></td>
+                                                    <td><?= $key->wali_kelas ?></td>
+                                                    <td><?= $key->asisten ?></td>
+                                                    <td style="width:10%;">
+                                                        <div class="row">
 
-                                                        <a class="btn btn-primary btn-xs text-white ml-1" href="<?= base_url('pengajar/pengajar/edit_kelas_ismah/');
-																													echo $key->code_kelas . '/' . $this->uri->segment(4) ?>"><i class="fa fa-edit"></i></a>
+                                                            <a class="btn btn-primary btn-xs text-white ml-1" href="<?= base_url('pengajar/pengajar/edit_kelas_ismah/');
+                                                                                                                    echo $key->code_kelas . '/' . $this->uri->segment(4) ?>"><i class="fa fa-edit"></i></a>
 
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                        </div>
+                                                    </td>
+                                                </tr>
 
                                             <?php endforeach; ?>
                                         </tbody>
@@ -89,8 +88,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="modalkamar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalkamar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-success">
@@ -110,7 +108,7 @@
                                 <select name="lembaga" id="lembaga" class="form-control lembaga" required>
                                     <option value="0">-PILIH LEMBAGA-</option>
                                     <?php foreach ($lembaga as $row) : ?>
-                                    <option value="<?= $row->id_lembaga; ?>"><?= $row->lembagaa; ?></option>
+                                        <option value="<?= $row->id_lembaga; ?>"><?= $row->lembagaa; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -150,19 +148,19 @@
                                 <select class="form-control" name="nk">
                                     <option style="color: green;"><b>= Lantai Bawah =</b></option>
                                     <?php for ($i = 1; $i <= 15; $i++) { ?>
-                                    <option value="<?php if ($i < 10) {
-															echo "00" . $i;
-														} else {
-															echo "0" . $i;
-														} ?>"><?php if ($i < 10) {
-																	echo "00" . $i;
-																} else {
-																	echo "0" . $i;
-																} ?></option>
+                                        <option value="<?php if ($i < 10) {
+                                                            echo "00" . $i;
+                                                        } else {
+                                                            echo "0" . $i;
+                                                        } ?>"><?php if ($i < 10) {
+                                                                    echo "00" . $i;
+                                                                } else {
+                                                                    echo "0" . $i;
+                                                                } ?></option>
                                     <?php } ?>
                                     <option style="color: green;"><b>= Lantai Atas =</b></option>
                                     <?php for ($i = 101; $i <= 115; $i++) { ?>
-                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                        <option value="<?= $i ?>"><?= $i ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -196,20 +194,16 @@
                         <div class="row">
                             <div class="col">
                                 <label for="foto">Wali Kelas</label>
-                                <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR"
-                                    onClick='javascript:window.open("twalikelaslaki","Ratting",
+                                <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR" onClick='javascript:window.open("twalikelaslaki","Ratting",
 						"width=750,height=570,toolbar=1,status=1,");'>
-                                    <input type="text" class="form-control" name="wk" id="wk"
-                                        placeholder="Nama Wali kelas" required>
+                                    <input type="text" class="form-control" name="wk" id="wk" placeholder="Nama Wali kelas" required>
                                 </a>
                             </div>
                             <div class="col">
                                 <label for="foto">Asisten</label>
-                                <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR"
-                                    onClick='javascript:window.open("tasistenlaki","Ratting",
+                                <a href="javascript:void(0);" NAME="PENGAJAR" title="Klik Untuk Cari NAMA PENGAJAR" onClick='javascript:window.open("tasistenlaki","Ratting",
 						"width=750,height=570,toolbar=1,status=1,");'>
-                                    <input type="text" class="form-control" name="as" id="as" placeholder="Nama Asisten"
-                                        required>
+                                    <input type="text" class="form-control" name="as" id="as" placeholder="Nama Asisten" required>
                                 </a>
                                 <input type="hidden" name="g" value="L">
                                 <input type="hidden" value="<?= $this->uri->segment(3); ?>" name="uri">

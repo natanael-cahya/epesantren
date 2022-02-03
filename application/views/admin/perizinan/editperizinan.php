@@ -110,6 +110,19 @@
 
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="alamat">Verifikasi</label>
+                                                <select name="acc" class=" form-control">
+                                                    <option <?= $l->verif == 1 ? 'selected' : '' ?> value="1">Acc
+                                                    </option>
+                                                    <option <?= $l->verif == 0 ? 'selected' : '' ?> value="0">Menunggu
+                                                        Persetujuan
+                                                    </option>
+                                                </select>
+
+                                            </div>
+                                        </div>
 
 
                                 </div>

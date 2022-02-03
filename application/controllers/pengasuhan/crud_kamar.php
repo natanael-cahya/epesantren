@@ -33,6 +33,43 @@ class Crud_kamar extends CI_Controller
 
 
 		$this->m_kamar->tb_kamar($data, 'tb_kamar');
-		echo "<script>alert('Data berhasil disimpan');location='../admin/$uri'</script>";
+		echo "<script>alert('Data berhasil disimpan');location='../pengasuhan/$uri'</script>";
+	}
+	function ed_kamar()
+	{
+
+		$wke = $this->input->post('wke');
+		$rke = $this->input->post('rke');
+		$rayone = $this->input->post('rayone');
+		$ge = $this->input->post('ge');
+		$urie = $this->input->post('urie');
+		$uide = $this->input->post('uide');
+
+		$data = array(
+			'wali_kamar' => $wke,
+			'ruang_kamar' => $rke,
+			'rayon' => $rayone,
+			'gender' => $ge,
+		);
+
+		$where = ['code_kamar' => $uide];
+		$this->m_kamar->ed_kamar($where, $data, 'tb_kamar');
+		echo "<script>alert('Data berhasil Diubah');location='../../pengasuhan/pengasuhan/$urie'</script>";
+	}
+	function ed_kmr()
+	{
+
+		$kmare = $this->input->post('kmare');
+		$urie = $this->input->post('urii');
+		$uide = $this->input->post('nise');
+
+		$data = array(
+			'code_kamar' => $kmare,
+
+		);
+
+		$where = ['nis' => $uide];
+		$this->m_kamar->ed_kamar($where, $data, 'tb_dsantri');
+		echo "<script>alert('Data berhasil Diubah');location='../../pengasuhan/pengasuhan/$urie'</script>";
 	}
 }

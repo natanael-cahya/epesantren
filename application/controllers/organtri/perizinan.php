@@ -40,32 +40,15 @@ class Perizinan extends CI_Controller
 			'status_perizinan' => $stat,
 			'tgl_mulai'	   	   => $tm,
 			'tgl_selesai'	   => $ts,
-			'keterangan_izin'  => $ket
+			'keterangan_izin'  => $ket,
+			'pencatat'		=> 4
 
 		);
 
 		$this->M_perizinan->tb_data($data, 'perizinan');
 		echo "<script>alert('data berhasil disimpan');location='../perizinan'</script>";
 	}
-	function edit()
-	{
-		$kd = $this->input->post('idx');
-		$nise = $this->input->post('nise');
-		$stats = $this->input->post('stats');
-		$tgl_selesai = $this->input->post('tgl_selesai');
-		$ket = $this->input->post('ket');
 
-		$data = array(
-			'nis_perizinan'			=> $nise,
-			'status_perizinan'		=> $stats,
-			'tgl_selesai'			=> $tgl_selesai,
-			'keterangan_izin'		=> $ket
-		);
-
-		$where = array('code_perizinan'	=> $kd);
-		$this->M_perizinan->edit($where, $data, 'perizinan');
-		echo "<script>alert('data berhasil diubah');location='../perizinan'</script>";
-	}
 	function delete()
 	{
 

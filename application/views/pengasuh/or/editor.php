@@ -19,7 +19,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Edit Data Pelanggaran Bahasa</a>
+                        <a href="#">Edit Data Pelanggaran Olahraga</a>
 
                     </li>
                 </ul>
@@ -31,7 +31,7 @@
 
                             <div class="d-flex align-items-center">
                                 <h3>
-                                    Edit Data Pelanggaran Bahasa
+                                    Edit Data Pelanggaran Olahraga
                                 </h3>
 
                             </div>
@@ -39,62 +39,55 @@
                                 <div class="container">
                                     <?php foreach ($pp as $k) : ?>
 
-                                    <form name="f1" method="post" enctype="multipart/form-data"
-                                        action="<?= base_url('admin/crud_pelanggaran/ed_pel'); ?>">
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="nis">NIS</label>
-                                                <a href="#nis" data-toggle="modal" data-target="#nis">
-                                                    <input type="text" name="nise" onchange="ambilnise(this.value)"
-                                                        value="<?= $k->nis ?>" class="form-control" id="nisee"
-                                                        placeholder="NIS">
-                                                </a>
+                                        <form name="f1" method="post" enctype="multipart/form-data" action="<?= base_url('admin/crud_pelanggaran/ed_pel'); ?>">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="nis">NIS</label>
 
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="nama">Nama</label>
-                                                <input type="text" name="" required class="form-control"
-                                                    value="<?= $k->nama ?>" readonly id="nama" placeholder="Nama">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
+                                                    <input type="text" readonly name="nise" onchange="ambilnise(this.value)" value="<?= $k->nis ?>" class="form-control" id="nisee" placeholder="NIS">
 
-                                            <div class="col">
-                                                <label for="foto">Pelanggaran</label>
-                                                <input type="text" name="plg" required class="form-control"
-                                                    value="<?= $k->pelanggaran ?>">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="alamat">Sanksi</label>
-                                                <input type="text" name="sanks" required value="<?= $k->sanksi ?>"
-                                                    class="form-control" id="alamat" placeholder="Alamat">
-                                                <input type="hidden" name="uri" value="<?= $this->uri->segment(3) ?>">
-                                                <input type="hidden" name="idx" value="<?= $k->code_pelanggaran ?>">
-                                            </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col">
-                                                <label for="alamat">Tingkat Pelanggaran</label>
-                                                <select class="form-control" name="tingkat">
-                                                    <option <?= $k->tingkat == 'Ringan' ? 'selected' : '' ?>>Ringan
-                                                    </option>
-                                                    <option <?= $k->tingkat == 'Sedang' ? 'selected' : '' ?>>Sedang
-                                                    </option>
-                                                    <option <?= $k->tingkat == 'Berat' ? 'selected' : '' ?>>Berat
-                                                    </option>
-                                                    <option <?= $k->tingkat == 'Sangat Berat' ? 'selected' : '' ?>>
-                                                        Sangat Berat</option>
-                                                </select>
-                                            </div>
-                                        </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="nama">Nama</label>
+                                                    <input type="text" name="" class="form-control" value="<?= $k->nama ?>" readonly id="nama" placeholder="Nama">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+
+                                                <div class="col">
+                                                    <label for="foto">Pelanggaran</label>
+                                                    <input type="text" name="plg" class="form-control" value="<?= $k->pelanggaran ?>">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="alamat">Sanksi</label>
+                                                    <input type="text" name="sanks" value="<?= $k->sanksi ?>" class="form-control" id="alamat" placeholder="Alamat">
+                                                    <input type="hidden" name="uri" value="<?= $this->uri->segment(3) ?>">
+                                                    <input type="hidden" name="idx" value="<?= $k->code_pelanggaran ?>">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <label for="alamat">Tingkat Pelanggaran</label>
+                                                    <select class="form-control" name="tingkat">
+                                                        <option <?= $k->tingkat == 'Ringan' ? 'selected' : '' ?>>Ringan
+                                                        </option>
+                                                        <option <?= $k->tingkat == 'Sedang' ? 'selected' : '' ?>>Sedang
+                                                        </option>
+                                                        <option <?= $k->tingkat == 'Berat' ? 'selected' : '' ?>>Berat
+                                                        </option>
+                                                        <option <?= $k->tingkat == 'Sangat Berat' ? 'selected' : '' ?>>
+                                                            Sangat Berat</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
                                 </div>
                                 <div class="modal-footer">
@@ -105,7 +98,7 @@
 
 
 
-                                    <?php endforeach; ?>
+                                <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -139,15 +132,14 @@
 
                             <tbody>
                                 <?php foreach ($esantri as $row) { ?>
-                                <tr>
-                                    <td><?= $row->nis ?></td>
-                                    <td><?= $row->nama ?></td>
-                                    <td><?= $row->nama_ayah ?></td>
-                                    <td><?= $row->nama_ibu ?></td>
+                                    <tr>
+                                        <td><?= $row->nis ?></td>
+                                        <td><?= $row->nama ?></td>
+                                        <td><?= $row->nama_ayah ?></td>
+                                        <td><?= $row->nama_ibu ?></td>
 
-                                    <td><a href='#' onclick="etangkapq('<?= $row->nis ?>');"><button
-                                                class="btn btn-primary">PILIH</button></a></td>
-                                </tr>
+                                        <td><a href='#' onclick="etangkapq('<?= $row->nis ?>');"><button class="btn btn-primary">PILIH</button></a></td>
+                                    </tr>
                                 <?php } ?>
 
                             </tbody>
@@ -164,7 +156,7 @@
     </div>
 
     <script>
-    <?php
+        <?php
 
         $array2 = "var dataa = new Array();\n";
         foreach ($esantri as $rows) {
@@ -173,15 +165,15 @@
         }
 
         ?>
-    <?php echo $array2; ?>
+        <?php echo $array2; ?>
 
 
-    function etangkapq(o) {
+        function etangkapq(o) {
 
-        document.getElementById('nama').value = dataa[o].nama;
-        document.getElementById('nisee').value = o;
-        $('#nis').modal('hide');
-    }
+            document.getElementById('nama').value = dataa[o].nama;
+            document.getElementById('nisee').value = o;
+            $('#nis').modal('hide');
+        }
     </script>
 
 
@@ -212,13 +204,12 @@
 
                             <tbody>
                                 <?php foreach ($tguru as $row) { ?>
-                                <tr>
-                                    <td><?= $row->code_pengajar ?></td>
-                                    <td><?= $row->nama_pengajar ?></td>
+                                    <tr>
+                                        <td><?= $row->code_pengajar ?></td>
+                                        <td><?= $row->nama_pengajar ?></td>
 
-                                    <td><a href='#' onclick="etangkappp('<?= $row->nama_pengajar ?>');"><button
-                                                class="btn btn-primary">PILIH</button></a></td>
-                                </tr>
+                                        <td><a href='#' onclick="etangkappp('<?= $row->nama_pengajar ?>');"><button class="btn btn-primary">PILIH</button></a></td>
+                                    </tr>
                                 <?php } ?>
 
                             </tbody>
@@ -235,7 +226,7 @@
     </div>
 
     <script>
-    <?php
+        <?php
 
         $array = "var data = new Array();\n";
         foreach ($tguru as $row) {
@@ -244,12 +235,12 @@
         }
 
         ?>
-    <?php echo $array; ?>
+        <?php echo $array; ?>
 
 
-    function etangkappp(s) {
+        function etangkappp(s) {
 
-        document.getElementById('wk').value = s;
-        $('#ket').modal('hide');
-    }
+            document.getElementById('wk').value = s;
+            $('#ket').modal('hide');
+        }
     </script>

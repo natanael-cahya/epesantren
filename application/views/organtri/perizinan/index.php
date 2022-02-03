@@ -6,7 +6,7 @@
                 <ul class="breadcrumbs">
                     <li class="nav-home">
                         <a href="#">
-                            <i class="fas fa-gavel"></i>
+                            <i class="fas fa-book"></i>
                         </a>
                     </li>
                     <li class="separator">
@@ -49,6 +49,8 @@
                                                 <th>tanggal izin</th>
                                                 <th>Tanggal Selesai</th>
                                                 <th>keterangan</th>
+                                                <th>Status</th>
+                                                <th>Pencatat</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,7 +64,22 @@
                                                 <td><?= date("d-m-Y", strtotime($l->tgl_mulai)) ?> </td>
                                                 <td><?= date("d-m-Y H:i", strtotime($l->tgl_selesai)) ?></td>
                                                 <td><?= $l->keterangan_izin ?></td>
-
+                                                <td><?= $l->verif == 1 ? "<i class='fa fa-check'></i>" : "<i class='fa fa-question'></i>" ?>
+                                                <td>
+                                                    <?php
+                                                        if ($l->pencatat ==  1) {
+                                                            echo "Admin";
+                                                        } else if ($l->pencatat ==  2) {
+                                                            echo "Pengasuhan";
+                                                        } else if ($l->pencatat ==  3) {
+                                                            echo "Pengajaran";
+                                                        } else if ($l->pencatat ==  4) {
+                                                            echo "Organtri";
+                                                        } else if ($l->pencatat ==  5) {
+                                                            echo "Poskestren";
+                                                        }
+                                                        ?>
+                                                </td>
                                             </tr>
 
                                             <?php endforeach; ?>

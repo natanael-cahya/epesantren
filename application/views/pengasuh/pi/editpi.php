@@ -19,7 +19,7 @@
                         <i class="flaticon-right-arrow"></i>
                     </li>
                     <li class="nav-item">
-                        <a href="#">Edit Data Pelanggaran Bahasa</a>
+                        <a href="#">Edit Data Pelanggaran Peribadatan</a>
 
                     </li>
                 </ul>
@@ -31,7 +31,7 @@
 
                             <div class="d-flex align-items-center">
                                 <h3>
-                                    Edit Data Pelanggaran Bahasa
+                                    Edit Data Pelanggaran Peribadatan
                                 </h3>
 
                             </div>
@@ -55,8 +55,8 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" name="" required class="form-control"
-                                                    value="<?= $k->nama ?>" readonly id="nama" placeholder="Nama">
+                                                <input type="text" name="" class="form-control" value="<?= $k->nama ?>"
+                                                    readonly id="nama" placeholder="Nama">
                                             </div>
                                         </div>
                                         <br>
@@ -64,7 +64,7 @@
 
                                             <div class="col">
                                                 <label for="foto">Pelanggaran</label>
-                                                <input type="text" name="plg" required class="form-control"
+                                                <input type="text" name="plg" class="form-control"
                                                     value="<?= $k->pelanggaran ?>">
                                             </div>
                                         </div>
@@ -72,7 +72,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="alamat">Sanksi</label>
-                                                <input type="text" name="sanks" required value="<?= $k->sanksi ?>"
+                                                <input type="text" name="sanks" value="<?= $k->sanksi ?>"
                                                     class="form-control" id="alamat" placeholder="Alamat">
                                                 <input type="hidden" name="uri" value="<?= $this->uri->segment(3) ?>">
                                                 <input type="hidden" name="idx" value="<?= $k->code_pelanggaran ?>">
@@ -102,6 +102,7 @@
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan
                                         Data</button>
                                     </form>
+
 
 
 

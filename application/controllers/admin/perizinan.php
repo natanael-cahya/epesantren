@@ -43,7 +43,9 @@ class Perizinan extends CI_Controller
 			'status_perizinan' => $stat,
 			'tgl_mulai'	   	   => $tm,
 			'tgl_selesai'	   => $ts,
-			'keterangan_izin'  => $ket
+			'keterangan_izin'  => $ket,
+			'verif'				=> 1,
+			'pencatat'			=> 1
 
 		);
 
@@ -57,12 +59,15 @@ class Perizinan extends CI_Controller
 		$stats = $this->input->post('stats');
 		$tgl_selesai = $this->input->post('tgl_selesai');
 		$ket = $this->input->post('ket');
+		$acc = $this->input->post('acc');
 
 		$data = array(
 			'nis_perizinan'			=> $nise,
 			'status_perizinan'		=> $stats,
 			'tgl_selesai'			=> $tgl_selesai,
-			'keterangan_izin'		=> $ket
+			'keterangan_izin'		=> $ket,
+			'verif'					=> $acc,
+			'pencatat'				=> 1
 		);
 
 		$where = array('code_perizinan'	=> $kd);
